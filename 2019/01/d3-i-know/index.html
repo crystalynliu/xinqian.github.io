@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="zjFKVFpIAnzGA1H6oKGPqfBb0jl2W1OqXi3DBH1JB-k">
+
+
+
+  <meta name="msvalidate.01" content="CD3CED86A0AACB9918F2C1576AB1EC9F">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true,"width":300},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="说起来当代社会有一个流行词语叫做可视化，以前我们是用纸笔，印刷技术来完成文字，数据的可视化。到了大数据井喷，人人都开始使用电子设备获取信息的时代，就需要使用技术来实现文字，数据的可视化。而在数据可视化中，最直观最有效的信息传递方式就是使用图表的方式来展现。 这里记录下来的是作为一个前端 developer, 在需要使用D3.js的去开发一个数据可视化界面设计时，所了解到的 D3.js。 这将成为一">
+<meta name="keywords" content="front-end,d3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我所知道的 D3.js">
+<meta property="og:url" content="http://blog.xqliu.vip/2019/01/d3-i-know/index.html">
+<meta property="og:site_name" content="旅 • 學 • 技">
+<meta property="og:description" content="说起来当代社会有一个流行词语叫做可视化，以前我们是用纸笔，印刷技术来完成文字，数据的可视化。到了大数据井喷，人人都开始使用电子设备获取信息的时代，就需要使用技术来实现文字，数据的可视化。而在数据可视化中，最直观最有效的信息传递方式就是使用图表的方式来展现。 这里记录下来的是作为一个前端 developer, 在需要使用D3.js的去开发一个数据可视化界面设计时，所了解到的 D3.js。 这将成为一">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.xqliu.vip/images/bindingData.jpg">
+<meta property="og:updated_time" content="2019-07-24T15:04:03.450Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我所知道的 D3.js">
+<meta name="twitter:description" content="说起来当代社会有一个流行词语叫做可视化，以前我们是用纸笔，印刷技术来完成文字，数据的可视化。到了大数据井喷，人人都开始使用电子设备获取信息的时代，就需要使用技术来实现文字，数据的可视化。而在数据可视化中，最直观最有效的信息传递方式就是使用图表的方式来展现。 这里记录下来的是作为一个前端 developer, 在需要使用D3.js的去开发一个数据可视化界面设计时，所了解到的 D3.js。 这将成为一">
+<meta name="twitter:image" content="http://blog.xqliu.vip/images/bindingData.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.xqliu.vip/2019/01/d3-i-know/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>我所知道的 D3.js | 旅 • 學 • 技</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-144478086-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-144478086-1');
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旅 • 學 • 技</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-university"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-hashtag"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th-large"></i> <br>Categories</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.xqliu.vip/2019/01/d3-i-know/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="X™Qiღn">
+      <meta itemprop="description" content="Keep recording travel, summary what I learned and share technology">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旅 • 學 • 技">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">我所知道的 D3.js
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: Jan 9, 2019 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-09T00:00:00+08:00">Jan 9, 2019</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/2019/01/d3-i-know/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/d3-i-know/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon" title="Views">
+            <i class="fa fa-eye"></i>
+            
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article">4.1k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>说起来当代社会有一个流行词语叫做<strong>可视化</strong>，以前我们是用纸笔，印刷技术来完成文字，数据的可视化。到了大数据井喷，人人都开始使用电子设备获取信息的时代，就需要使用技术来实现文字，数据的可视化。而在数据可视化中，最直观最有效的信息传递方式就是<strong>使用图表的方式来展现</strong>。</p>
+<p>这里记录下来的是作为一个前端 developer, 在需要使用<code>D3.js</code>的去开发一个数据可视化界面设计时，所了解到的 <code>D3.js</code>。</p>
+<p>这将成为一系列的文章，这是第一篇。</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h2 id="What’s-D3"><a href="#What’s-D3" class="headerlink" title="What’s D3?"></a>What’s D3?</h2><p>先来看看官方解释：</p>
+<blockquote>
+<p>D3 (or D3.js) is a JavaScript library for visualizing data using web standards. D3 helps you bring data to life using SVG, Canvas and HTML. D3 combines powerful visualization and interaction techniques with a data-driven approach to DOM manipulation, giving you the full capabilities of modern browsers and the freedom to design the right visual interface for your data.</p>
+</blockquote>
+<p>看着是不是一脸懵😳。英语不好的话，可以参考一下我的翻译，官方发言说：</p>
+<p>D3 是一个遵循现有的<code>web</code>标准上基于数据来操作 HTML DOM（Document Object Model）的 JavaScript 函数库（当然如果你不知道什么叫做 JavaScript，那你就可以关掉这篇文章了。），D3 用 SVG, Canvas 以及 HTML 把展示数据。D3 结合强大的可视化数据驱动技术来驱动 DOM 操作 ，给你强大的能力以及自由针对你的数据去设计更好的可视化界面。</p>
+<p>了解过官方的定义之后，再来通俗的给大家一个解释。</p>
+<p>D3的全称是 <strong>Data Driven Documents</strong>。懂点英语的都可以直译：<strong>数据驱动文档</strong>。其实简单来说，就是一个 JavaScript 的函数库，是用来在不借助任何框架的情况下，帮助你在现代浏览器里画出你想要的数据图表。</p>
+<p>D3 是一个开源项目，托管在 Github 上, 目前 <strong>Most stars 排名第8</strong>, 可以看出这是个非常之受欢迎的函数库。那是因为它有着不可替代的优势。</p>
+<h2 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h2><ul>
+<li>它是一个 <strong>jQuery like api 的函数库</strong>，有前端基础的同学可以很容易使用它的 API ,链式操作以及事件处理。</li>
+<li>它跟目前存在的图形库（<code>Echarts</code>之类）相比，<strong>更底层</strong>，那它就有<strong>更大的灵活性</strong>，可以给 UX 以及 developer 更大的发挥空间。</li>
+</ul>
+<h1 id="How-to-use-and-learn-it"><a href="#How-to-use-and-learn-it" class="headerlink" title="How to use and learn it"></a>How to use and learn it</h1><h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><ul>
+<li>下载最新版本<code>.zip</code>(目前的版本已经更新到 V5)： <a href="https://github.com/d3/d3/releases/download/v5.5.0/d3.zip" target="_blank" rel="noopener">d3.zip</a></li>
+<li><p>页面插入如下代码，在线使用</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://d3js.org/d3.v5.min.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果在框架中使用（React, Vue, Angular等），使用 npm 安装</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install d3 --save</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Learning"><a href="#Learning" class="headerlink" title="Learning"></a>Learning</h2><ul>
+<li>非常长的 <a href="https://github.com/d3/d3/blob/master/API.md" target="_blank" rel="noopener">API document</a></li>
+<li>成堆的 <a href="https://github.com/d3/d3/wiki" target="_blank" rel="noopener">tutorials</a></li>
+</ul>
+<h1 id="D3-with-DOM"><a href="#D3-with-DOM" class="headerlink" title="D3 with DOM"></a>D3 with DOM</h1><p><code>Data Divern Documents</code> 的体现，在于 D3.js 这个函数库，可以针对输入的数据通过它的 API 方法去操作 DOM 元素（也就是 Documents, 来自于 HTML 概念）</p>
+<h2 id="Selection"><a href="#Selection" class="headerlink" title="Selection"></a>Selection</h2><p>D3 提供了一种 API，被成为 <code>selections</code>，可以对 DOM 中的任意节点进行操作。D3 的 选择器是定义于 W3C 标准,可以使用的选择器包括：</p>
+<ul>
+<li>标签（<code>&quot;div&quot;</code>)</li>
+<li>类（<code>&quot;.awesome&quot;</code>)</li>
+<li>Id (<code>&quot;#id&quot;</code>)</li>
+<li>属性 (<code>&quot;[color=red]&quot;</code>)</li>
+</ul>
+<p>以及更多的联合选择器以及伪选择器。</p>
+<p>D3 目前提供了两种高级方法来匹配元素：</p>
+<ul>
+<li><code>select()</code> ： 只返回第一个匹配的元素, 接收的参数可以是一个选择器字符串，也可以是一个节点</li>
+<li><code>selectAll()</code>：选择在文档中遍历所有匹配的元素。接受的参数既可以是选择器字符串，也可以是一个节点（node) list。</li>
+</ul>
+<p>D3 为匹配到的 node 提供了许多方法：</p>
+<ul>
+<li>设置属性或者样式</li>
+<li>注册事件监听器</li>
+<li>添加、删除或排序 node</li>
+<li>更改 HTML 或文本内容</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="string">"white"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Dynamic-Properies"><a href="#Dynamic-Properies" class="headerlink" title="Dynamic Properies"></a>Dynamic Properies</h2><p>如果对其他 DOM 函数库（类似于 jQuery）比较熟悉的同学可以发现这样的操作和 D3是非常的相似。然而，在 D3 中，属性以及样式也可以<strong>被指定为数据中的函数，并不仅仅只是简单的常量</strong>。</p>
+<p>例如，给每个段落随机的颜色：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"hsl("</span> + <span class="built_in">Math</span>.random() * <span class="number">360</span> + <span class="string">",100%,50%)"</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在 D3 中，绑定是一种比较独特的职责。<strong>当数据被指定为一个数组，其中每个值都会被作为参数（d）传递到 selection 的函数中</strong>。根据默认的索引排序，数据中的第一个值会传递给匹配到的第一个node, 第二个值会传递给匹配到的第二个 node, 以此类推。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">"p"</span>)</span><br><span class="line">	.data([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">	.style(<span class="string">"font-size"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;<span class="keyword">return</span> d + <span class="string">"px"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上的代码说明，当一组数据绑定到 <code>p</code> 元素上，结果就是使用这些数据动态的设置每个 <code>p</code> 的字体大小。</p>
+<p>D3 中提供了以下两个方法来绑定数据：</p>
+<ul>
+<li>datum()：绑定一个数据到选择集上</li>
+<li>data()：绑定一组数据到选择集上，数组中的各项值分别与匹配到的 element 绑定</li>
+</ul>
+<h2 id="Enter-and-Exit"><a href="#Enter-and-Exit" class="headerlink" title="Enter and Exit"></a>Enter and Exit</h2><p>对于之前的示例，我们都假设 data 的个数以及匹配到的 element 个数相同。那 data 与 element 就可以一一对应的进行绑定。</p>
+<p>但是，如果 data 和匹配到的 element 个数不相同的情况下，怎么办呢？</p>
+<ul>
+<li><code>data.length &gt; element.length</code>, 说明 DOM 元素少了，我们需要执行 <code>add elements</code> 的操作</li>
+<li><code>data.length &lt; element.length</code>, 说明 DOM 元素多了，那我们需要执行的是 <code>remove elements</code> 的操作。</li>
+</ul>
+<p>那在 D3 中是通过什么样的操作来管理这两种情况呢？</p>
+<ul>
+<li><code>.enter()</code> 指明了<strong>所有没有匹配上 DOM 的数据集合</strong>，随后结合<code>.append()</code> 操作，选择将这些没有匹配上的数据集合实例化。</li>
+<li><code>.exit()</code> 返回<strong>未能绑定到数据的 DOM 元素集合</strong>，结合<code>.remove()</code>操作，来删除那些没有绑定上数据的 DOM 元素。</li>
+</ul>
+<p>与以上两种操作相对应的是，<code>.data()</code>操作默认会<strong>返回可更新的 DOM 元素集合</strong>，所以说，如果你忘记了<code>.enter()</code> 以及 <code>.exit()</code> 操作，那么我们将自动获得已经与存在数据绑定上的元素。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Update...</span></span><br><span class="line"><span class="keyword">const</span> p = d3.select(<span class="string">"body"</span>)</span><br><span class="line">  .selectAll(<span class="string">"p"</span>)</span><br><span class="line">  .data([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">  .text(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Enter...</span></span><br><span class="line">p.enter().append(<span class="string">"p"</span>)</span><br><span class="line"> .text(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Exit...</span></span><br><span class="line">p.exit().remove()</span><br></pre></td></tr></table></figure>
+<p>通过对 selection 的一些操作描述，会发现这些操作，将选择的 DOM 元素分为了3组：</p>
+<ul>
+<li>需要创建的元素（加入组）</li>
+<li>需要更新的元素（更新组）</li>
+<li><p>需要删除的元素（退出组）</p>
+<p><img src="/images/bindingData.jpg" alt=""></p>
+</li>
+</ul>
+<p>总结得出，D3 使用这些操作，<strong>实现了数据集到 DOM 元素实例化之间的平滑转换</strong>。这发挥了提升性能最大化，并对转换有了更大的控制。实际上这种渲染方式与 React 管理子元素渲染的方式相似。</p>
+<h2 id="Handling-events"><a href="#Handling-events" class="headerlink" title="Handling events"></a>Handling events</h2><p>类似于 jQuery 这类的函数库，<strong>D3使用 <code>selection.on()</code> 对 elements 添加事件处理函数，相应的数据（d）和索引（i）也将会当做参数传入到事件处理函数中进行处理</strong>。事件有以下几种：<code>click</code>, <code>mouseenter</code>, <code>mouseover</code>, <code>mouseleave</code>, <code>mouseout</code> 以及 <code>mousemove</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">'rect'</span>)</span><br><span class="line">  .on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d, i</span>) </span>&#123;</span><br><span class="line">    d3.select(<span class="keyword">this</span>)</span><br><span class="line">      .text(<span class="string">'You clicked on rect'</span> + i);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>这段代码实现当点击后就修改其 text 指明第几个元素被点击。</p>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>当你看完了这篇文章，似乎觉得这些都是纸上谈兵。没错，这一篇 D3 的文章更偏于理论介绍, 是期望大家在看接下来的文章时，对 D3 已经有了大概的认知，那我们就更容易理解一些 Demo 以及其他的 API 概念。如果大家还对 D3 有兴趣，那么可以持续关注这一系列。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/front-end/" rel="tag"># front-end</a>
+          
+            <a href="/tags/d3/" rel="tag"># d3</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/css-flex/" rel="next" title="Flex，的全面理解">
+                <i class="fa fa-chevron-left"></i> Flex，的全面理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/d3-with-react/" rel="prev" title="D3.js 如何在 React 生态系统存活">
+                D3.js 如何在 React 生态系统存活 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="X™Qiღn">
+            
+              <p class="site-author-name" itemprop="name">X™Qiღn</p>
+              <p class="site-description motion-element" itemprop="description">Keep recording travel, summary what I learned and share technology</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/crystalynliu" title="GitHub &rarr; https://github.com/crystalynliu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:crystalynliu@163.com" title="E-Mail &rarr; mailto:crystalynliu@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s-D3"><span class="nav-number">1.1.</span> <span class="nav-text">What’s D3?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantage"><span class="nav-number">1.2.</span> <span class="nav-text">Advantage</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-use-and-learn-it"><span class="nav-number">2.</span> <span class="nav-text">How to use and learn it</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">2.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning"><span class="nav-number">2.2.</span> <span class="nav-text">Learning</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D3-with-DOM"><span class="nav-number">3.</span> <span class="nav-text">D3 with DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Selection"><span class="nav-number">3.1.</span> <span class="nav-text">Selection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic-Properies"><span class="nav-number">3.2.</span> <span class="nav-text">Dynamic Properies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enter-and-Exit"><span class="nav-number">3.3.</span> <span class="nav-text">Enter and Exit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handling-events"><span class="nav-number">3.4.</span> <span class="nav-text">Handling events</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#End"><span class="nav-number">4.</span> <span class="nav-text">End</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">X™Qiღn</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">24k</span>
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+  <script id="dsq-count-scr" src="https://crystalynliu.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://blog.xqliu.vip/2019/01/d3-i-know/";
+    this.page.identifier = "2019/01/d3-i-know/";
+    this.page.title = '我所知道的 D3.js';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://crystalynliu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

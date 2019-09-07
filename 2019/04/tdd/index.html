@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="zjFKVFpIAnzGA1H6oKGPqfBb0jl2W1OqXi3DBH1JB-k">
+
+
+
+  <meta name="msvalidate.01" content="CD3CED86A0AACB9918F2C1576AB1EC9F">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true,"width":300},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="TDD 作为敏捷开发中的重要环节，总是讨论的焦点，总是在说 TDD 这样那样。其实，我觉得大多数人对 TDD 的理解是模糊的，不明确的。从而导致没有人愿意有意识的去尝试使用 TDD, 去验证一下 TDD 到底会给我们带来什么？ 我也是一枚初识 TDD 的菜鸟，所以想用自己的理解以及经历来解答上面的问题。">
+<meta name="keywords" content="agile,tdd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TDD入门者的认知">
+<meta property="og:url" content="http://blog.xqliu.vip/2019/04/tdd/index.html">
+<meta property="og:site_name" content="旅 • 學 • 技">
+<meta property="og:description" content="TDD 作为敏捷开发中的重要环节，总是讨论的焦点，总是在说 TDD 这样那样。其实，我觉得大多数人对 TDD 的理解是模糊的，不明确的。从而导致没有人愿意有意识的去尝试使用 TDD, 去验证一下 TDD 到底会给我们带来什么？ 我也是一枚初识 TDD 的菜鸟，所以想用自己的理解以及经历来解答上面的问题。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.xqliu.vip/images/cycle.jpeg">
+<meta property="og:updated_time" content="2019-07-24T15:19:46.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TDD入门者的认知">
+<meta name="twitter:description" content="TDD 作为敏捷开发中的重要环节，总是讨论的焦点，总是在说 TDD 这样那样。其实，我觉得大多数人对 TDD 的理解是模糊的，不明确的。从而导致没有人愿意有意识的去尝试使用 TDD, 去验证一下 TDD 到底会给我们带来什么？ 我也是一枚初识 TDD 的菜鸟，所以想用自己的理解以及经历来解答上面的问题。">
+<meta name="twitter:image" content="http://blog.xqliu.vip/images/cycle.jpeg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.xqliu.vip/2019/04/tdd/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>TDD入门者的认知 | 旅 • 學 • 技</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-144478086-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-144478086-1');
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旅 • 學 • 技</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-university"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-hashtag"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th-large"></i> <br>Categories</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.xqliu.vip/2019/04/tdd/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="X™Qiღn">
+      <meta itemprop="description" content="Keep recording travel, summary what I learned and share technology">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旅 • 學 • 技">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TDD入门者的认知
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: Apr 21, 2019 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-21T00:00:00+08:00">Apr 21, 2019</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Methodology/" itemprop="url" rel="index"><span itemprop="name">Methodology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/2019/04/tdd/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/tdd/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon" title="Views">
+            <i class="fa fa-eye"></i>
+            
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article">4.3k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>TDD 作为敏捷开发中的重要环节，总是讨论的焦点，总是在说 TDD 这样那样。其实，我觉得大多数人对 TDD 的理解是模糊的，不明确的。从而导致没有人愿意有意识的去尝试使用 TDD, 去验证一下 TDD 到底会给我们带来什么？</p>
+<p>我也是一枚初识 TDD 的菜鸟，所以想用自己的理解以及经历来解答上面的问题。</p>
+<a id="more"></a>
+<h1 id="What’s-TDD"><a href="#What’s-TDD" class="headerlink" title="What’s TDD?"></a>What’s TDD?</h1><p>先来看看 <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="noopener">Wiki</a> 的定义</p>
+<blockquote>
+<p>Test-driven development (TDD) is a <strong>software development process</strong> that relies on the repetition of a very short development cycle: requirements are turned into very specific test cases, then the software is improved to pass the new tests, only.</p>
+<p>Test-driven development is related to the test-first programming concepts of extreme programming, begun in 1999, but more recently has created more general interest in its own right.</p>
+</blockquote>
+<p>关注这段话中几个重要的点：</p>
+<ul>
+<li><strong>TDD 是一种方法论</strong>，主要是驱使我们更早的去思考和设计应该怎样实现我们的程序。</li>
+<li><strong>TDD 是基于测试先行的一种重复开发的过程</strong>，这里的测试指的是软件测试本身，包括基于代码单元的单元测试，基于业务需求的功能测试，以及基于特定验收条件的验收测试。</li>
+</ul>
+<p>所以，本质上来说，TDD 被区分为两部分：<strong>ATDD</strong> 和 <strong>UTDD</strong>。</p>
+<ul>
+<li><p><strong>ATDD (Acceptance Test Driven Development)</strong> : 基于验收测试的驱动开发，这种方式主要是由 BA 或者 QA 来编写测试用例，然后 Dev 通过验收测试来理解需求和验收条件，并编写实现代码直到验收测试用例通过。所以根据验收方法和类型的不同，ATDD 包括了 BDD（Behavior Driven Development）、EDD（Example Driven Development），FDD（Feature Driven Development）、CDCD（Consumer Driven Contract Development）等各种的实践方法。</p>
+</li>
+<li><p><strong>UTDD (Unit Test Driven Development)</strong> : 单元测试驱动开发，这种方式主要是  DEV 自己来编写单元测试用例，之后编写实现直到测试通过。</p>
+</li>
+</ul>
+<p>给了定义，再来看看区别，ATDD 本身更关注于能让 BA，QA 以及 DEV 在产品需求方面快速有一个统一的理解，而 UTDD 更关注于能快速的让 DEV 得到在程序设计方面的反馈。</p>
+<p>而现在大多数人所认为的 TDD 只是单方面的理解为 UTDD。那接下来主要的关注点也就是备受争论的 UTDD。</p>
+<h1 id="How-to-use-UTDD"><a href="#How-to-use-UTDD" class="headerlink" title="How to use UTDD?"></a>How to use UTDD?</h1><p>UTDD 是一种依赖重复<strong>特定开发流程</strong>的方法论，学习怎么用 UTDD, 先要了解这种开发流程是什么样的。</p>
+<h2 id="Test-driven-development-cycle"><a href="#Test-driven-development-cycle" class="headerlink" title="Test driven development cycle"></a>Test driven development cycle</h2><p><img src="/images/cycle.jpeg" alt=""></p>
+<ol>
+<li>Add a test</li>
+<li>Run all tests and see if the new test fails</li>
+<li>Write the code</li>
+<li>Run tests</li>
+<li>Refactor code</li>
+</ol>
+<p>Okay，过程是了解了，但是是不是只要重复这个过程就是 UTDD 了呢？答案并不是，UTDD 还有三条需要遵循的原则。</p>
+<h2 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h2><ul>
+<li><p><strong>Not allowed to write any production code unless it is to make a failing unit test pass.</strong></p>
+<p>  “除非是为了使一个失败的 unit test 通过，否则不允许编写任何产品代码。”</p>
+<p>  如果我们违反这个原则，先编写了实现代码，那这段实现代码是为了什么呢？怎么确保它真的实现了你的需求呢？基于需求的 test case 就是为了确保实现代码真正的实现了需求，而不是其他无用的代码。</p>
+</li>
+<li><p><strong>Not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.</strong></p>
+<p>  “在一个单元测试中，只允许编写刚好能够导致失败的内容（编译错误也算失败）。”</p>
+<p>  如果写了多个失败的测试，测试总是无法通过会增加 developer 的压力。并且如果测试需要重构，也会增加测试成本。 </p>
+</li>
+<li><p><strong>Not allowed to write any more production code than is sufficient to pass the one failing unit test.</strong></p>
+<p>  “只允许编写刚好能够使一个失败的 unit test 通过的产品代码。”</p>
+<p>  实现了超出当前测试的代码，这部分代码是没有测试保证的，那么不能保证其正确性，并且可能是不需要的需求，那就凭空增加了代码的复杂性。</p>
+</li>
+</ul>
+<p>总结来看 UTDD 的开发流程以及原则，本质上是为了</p>
+<blockquote>
+<p>分离关注点，一次只戴一顶帽子</p>
+</blockquote>
+<p>UTDD 中明确的三个步骤分别代表了三个关注点：<strong>需求</strong>， <strong>实现</strong> 以及 <strong>设计</strong>。</p>
+<ul>
+<li>写一个失败的测试。是对需求的描述，是为了确认需求是什么，而不用关心怎么实现。</li>
+<li>实现代码让测试通过。不用考虑需求是否符合预期，不用 care 代码写的多烂，只要写出让输入变成输出的逻辑就可以了。</li>
+<li>重构代码。既不用考虑需求，也没有实现压力，更不用害怕重构会破坏原有的功能。找出代码的 bad smell，提高代码质量。 </li>
+</ul>
+<h1 id="Why-we-need-to-use-UTDD"><a href="#Why-we-need-to-use-UTDD" class="headerlink" title="Why we need to use UTDD?"></a>Why we need to use UTDD?</h1><p><strong>Why</strong> 翻译成中文是”为什么“，而我们再用这个词的时候，真正想知道应该是”什么“。”Why we need to use UTDD?“ 这句话在我看来实际就是一种<strong>趋利</strong>的表现，实际上真正表达的是”UTDD 能给我们带来什么好处“。</p>
+<ul>
+<li><p><strong>Not just simple validation of correctness, but can also drive the design of a program.</strong></p>
+<p>  ”不仅仅是对正确性的简单验证，也可以驱动整个程序的设计“。</p>
+<p>  怎么来理解这句话呢？UTDD 会要求我们先要写测试，先关注于测试的 case 都有哪些，那就说我们需要提前去考虑 client 端是怎么样调用 function 的。那就是说我们需要在实现之前先设计好 interface，思考需求合理行以及提前澄清需求。</p>
+</li>
+<li><p><strong>Offers the ability to take small steps when required.</strong></p>
+<p>  ”提供了可以小步开发的能力。“</p>
+<p>  UTDD 会强迫将开发的步骤变小，在实现需求的时候，它只要求关注于怎么实现能通过当前的测试而不用关心其他异常情况的处理。这样被称作“小步快走”的开发，它会带来两个好处：</p>
+<ul>
+<li><strong>让你的代码中不会有多余的无用代码</strong>。无用代码指的是这段代码的删除并不会影响你的测试是否通过。</li>
+<li><strong>节省了调试的时间与成本</strong>。如果程序出现了问题需要调试，只用关注于刚刚为了通过测试而添加的代码，快速的定位到问题。</li>
+</ul>
+</li>
+<li><p><strong>Offers enought tests to protect program and tests are document.</strong></p>
+<p>  “提供了足够的测试保护程序, 以及测试即文档。”</p>
+<p>  UTDD 是以测试先行的模式进行开发的，这样会保证</p>
+<ul>
+<li><p><strong>所有的功能都会有测试来描述。</strong> 不知道大家有没有过这样的经验，当你想要使用一个开源库的时候，发现它没有全面的 api 文档，不知道怎么它有哪些 api，不知道怎么使用它的 api。这个时候我就会去看 <code>test</code> 文件，通过 test 的用法以及描述，相当于我在看一篇详细的 api 文档。</p>
+</li>
+<li><p><strong>几乎100%的有效测试覆盖率。</strong> 足够的测试覆盖率，会让我们很有自信地对代码设计进行重构，而不担心是否会破坏原有的功能，从而提高整体的代码质量，让其变得更加健壮以及可维护。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Why-we-cannot-use-UTDD-better"><a href="#Why-we-cannot-use-UTDD-better" class="headerlink" title="Why we cannot use UTDD better?"></a>Why we cannot use UTDD better?</h1><p>总是有人在问，TDD 或者 UTDD 听起来这么有用，那为什么并没有很多人去用呢？对，可能大家或多或少都会听过 TDD，但是身边有几个人真正去使用过 TDD 呢？可能千分之一？可能万分之一。从我工作以来了解到的情况分析，原因不过于一下三点：</p>
+<ul>
+<li><p><strong>陡峭的学习曲线</strong></p>
+<p>从 <strong>How to use UTDD</strong> 可以了解到，要使用 UTDD 进行开发，你需要很多基础技术的支持，怎么去 tasking 需求，怎么写 unit test 甚至于需要专门去训练怎么 refactor。就是说想要使用 UTDD 那就必须在短时间内学习以上的内容，我们都知道陡峭的学习曲线是很难去坚持的。</p>
+</li>
+<li><p><strong>急迫的快餐文化</strong></p>
+<p>上面说过了使用 UTDD 之前需要学习的内容，这样的学习压力会导致需要过多的投资付出，所以 UTDD 看起来是一种长期回报。而在今天的互联网时代，我们更加崇尚快餐文化，这种文化让我们不能很有耐心的看到 TDD 的回报，不认可 TDD 能带来更高的效率以及更高的质量。</p>
+</li>
+<li><p><strong>代码质量 vs 产品质量</strong></p>
+<p>到目前为止，没有任何一个事实能真正的支持代码质量和产品质量之前有着直接的因果关系。产品质量是什么，是产品有没有 bug, 而代码质量更多的关注于代码的可读性，健壮性以及可维护性。而 UTDD 带来的更多是相对于代码质量的好处。所以对于关注产品质量的角色来说，并不一定会认可这样的付出。</p>
+</li>
+</ul>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>看完上面👆这么多好与不好，总看起来像是纸上谈兵，不落地。也有人觉得 TDD 就是一种伪理论伪方法，并不会带来实质性的好处。我不推崇 TDD, 我也并不否定它，我觉得只有认真学习及实践过才有资格谈论好坏。</p>
+<p>日本有一种剑道学习方法名为 <a href="https://baike.baidu.com/item/%E5%AE%88%E7%A0%B4%E7%A6%BB?fr=aladdin" target="_blank" rel="noopener">“守，破，离”</a>。<strong>守</strong> 即是先要虚心学习， <strong>破</strong> 即是当你学习熟练之后就可以挑战它摒弃糟粕，<strong>离</strong> 即是重新定义你学习的东西。</p>
+<p>当我们大谈阔论 TDD 的时候，又有几个人真正地虚心学习过？</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://www.jianshu.com/p/62f16cd4fef3" target="_blank" rel="noopener">《深度解读-TDD》</a></li>
+<li><a href="http://insights.thoughtworkers.org/talk-about-tdd-again/" target="_blank" rel="noopener">让我们再聊聊 TDD</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/agile/" rel="tag"># agile</a>
+          
+            <a href="/tags/tdd/" rel="tag"># tdd</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/d3-with-react/" rel="next" title="D3.js 如何在 React 生态系统存活">
+                <i class="fa fa-chevron-left"></i> D3.js 如何在 React 生态系统存活
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/fancy-terminal/" rel="prev" title="搭建 Colorful Terminal (iTerm2 + oh-my-zsh)">
+                搭建 Colorful Terminal (iTerm2 + oh-my-zsh) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="X™Qiღn">
+            
+              <p class="site-author-name" itemprop="name">X™Qiღn</p>
+              <p class="site-description motion-element" itemprop="description">Keep recording travel, summary what I learned and share technology</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/crystalynliu" title="GitHub &rarr; https://github.com/crystalynliu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:crystalynliu@163.com" title="E-Mail &rarr; mailto:crystalynliu@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What’s-TDD"><span class="nav-number">1.</span> <span class="nav-text">What’s TDD?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-use-UTDD"><span class="nav-number">2.</span> <span class="nav-text">How to use UTDD?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-driven-development-cycle"><span class="nav-number">2.1.</span> <span class="nav-text">Test driven development cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Principle"><span class="nav-number">2.2.</span> <span class="nav-text">Principle</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-we-need-to-use-UTDD"><span class="nav-number">3.</span> <span class="nav-text">Why we need to use UTDD?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-we-cannot-use-UTDD-better"><span class="nav-number">4.</span> <span class="nav-text">Why we cannot use UTDD better?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#End"><span class="nav-number">5.</span> <span class="nav-text">End</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">X™Qiღn</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">24k</span>
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+  <script id="dsq-count-scr" src="https://crystalynliu.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://blog.xqliu.vip/2019/04/tdd/";
+    this.page.identifier = "2019/04/tdd/";
+    this.page.title = 'TDD入门者的认知';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://crystalynliu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
