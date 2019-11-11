@@ -15,7 +15,7 @@
 
 
 <html class="theme-next mist use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -110,7 +110,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://blog.xqliu.vip/images/bindingData.jpg">
 <meta property="og:image" content="http://blog.xqliu.vip/images/bar.png">
-<meta property="og:updated_time" content="2019-07-24T15:20:22.696Z">
+<meta property="og:updated_time" content="2019-07-24T15:20:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="D3.js 如何在 React 生态系统存活">
 <meta name="twitter:description" content="如果你对 D3 这个词语比较陌生，那你可以移步我的上一篇文章《我所知道的 D3》去了解一些关于 D3 的基础知识。 在这一篇继续学习 D3 中，我将会给出实例代码来展现 D3.js 是怎么样画出我们想要的图形，而根据现在的前端发展，又是怎么样和框架结合起来使用的呢？">
@@ -180,7 +180,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -190,7 +190,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -337,20 +337,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.xqliu.vip/2019/01/d3-with-react/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="X™Qiღn">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XinQiღn™">
       <meta itemprop="description" content="Keep recording travel, summary what I learned and share technology">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="旅 • 學 • 技">
     </span>
 
@@ -399,7 +399,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
 
                 
                 
@@ -480,7 +480,7 @@
 <li>需要创建的元素（加入组）</li>
 <li>需要更新的元素（更新组）</li>
 <li><p>需要删除的元素（退出组）</p>
-<p><img src="/images/bindingData.jpg" alt=""></p>
+<p><img src="/images/bindingData.jpg" alt></p>
 </li>
 </ul>
 <p>通过这样的描述，我们可以知道 D3 的绑定数据可以<strong>实现数据集到DOM元素之间的平滑转换</strong>。实际上这样的渲染方式和 React 的子元素渲染方式非常的像。</p>
@@ -511,7 +511,7 @@
 <p>这目前是<strong>对 React 最友好的实现方式</strong>，它的实现方式几乎与 React完全一致，并且可以将每一个部分的图形，拿出来单独的做组件化。另一个好处是在服务端进行渲染，也可以用来 React Native 上（并没有验证是否可行😁）</p>
 <p>但是它的缺点也是毋庸置疑的，就是原本很多 D3 可以帮我们完成的工作，我们需要自己来完成(例如缩放，拖动以及动画等复杂功能)，这意味着你可能需要大量的工作来做本来 D3 就可以完成的功能。</p>
 <h1 id="我们简单的来画一个柱状图"><a href="#我们简单的来画一个柱状图" class="headerlink" title="我们简单的来画一个柱状图"></a>我们简单的来画一个柱状图</h1><p>针对以上的了解，我们在实际代码中看一下，D3 以及 D3 与 React 结合的方式来渲染图形的区别。</p>
-<p><img src="/images/bar.png" alt=""></p>
+<p><img src="/images/bar.png" alt></p>
 <p>我们期待的输入数据为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const data = [</span><br><span class="line">  &#123; city: &apos;北京&apos;, amount: 1000, &#125;,</span><br><span class="line">  &#123; city: &apos;上海&apos;, amount: 803, &#125;,</span><br><span class="line">  &#123; city: &apos;广州&apos;, amount: 440, &#125;,</span><br><span class="line">  &#123; city: &apos;深圳&apos;, amount: 780, &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 <p>在开始写代码之前，我们需要了解 bar 图的组装部分，都需要使用什么样的图形来组装：</p>
@@ -648,11 +648,11 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="X™Qiღn">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="XinQiღn™">
             
-              <p class="site-author-name" itemprop="name">X™Qiღn</p>
+              <p class="site-author-name" itemprop="name">XinQiღn™</p>
               <p class="site-description motion-element" itemprop="description">Keep recording travel, summary what I learned and share technology</p>
           </div>
 
@@ -663,7 +663,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -675,8 +675,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -727,7 +725,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -820,7 +820,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-heartbeat"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">X™Qiღn</span>
+  <span class="author" itemprop="copyrightHolder">XinQiღn™</span>
 
   
     <span class="post-meta-divider">|</span>
@@ -828,7 +828,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">24k</span>
+    <span title="Symbols count total">26k</span>
   
 
   

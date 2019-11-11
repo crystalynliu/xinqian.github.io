@@ -15,7 +15,7 @@
 
 
 <html class="theme-next mist use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -118,7 +118,7 @@
 <meta property="og:image" content="http://blog.xqliu.vip/images/order.svg">
 <meta property="og:image" content="http://blog.xqliu.vip/images/flex-grow.svg">
 <meta property="og:image" content="http://blog.xqliu.vip/images/align-self.svg">
-<meta property="og:updated_time" content="2019-07-24T15:15:00.787Z">
+<meta property="og:updated_time" content="2019-07-24T15:15:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flex，的全面理解">
 <meta name="twitter:description" content="对于刚刚接触 CSS 的码农们在面对布局问题的时，心里都在怒吼，为什么这个 div 就不能乖乖的在它自己的位置上。然而，一般引起布局与期望不同的原因一般有两个属性 —— “杀手” float 以及 “子不教父之过”的 postion。  为了让我们能够更高效更灵活的完成 Web 页面中的布局，出现了Flexbox Layout。">
@@ -188,7 +188,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -198,7 +198,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -345,20 +345,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.xqliu.vip/2018/08/css-flex/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="X™Qiღn">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XinQiღn™">
       <meta itemprop="description" content="Keep recording travel, summary what I learned and share technology">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="旅 • 學 • 技">
     </span>
 
@@ -407,7 +407,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
 
                 
                 
@@ -486,7 +486,7 @@
 <hr>
 <h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>在现代，所有展示在浏览器的产品，都逃脱不了，css 布局（layout）的魔咒，甚至现在为了兼容手机，pad 端的显示，还要完成响应式布局。当然了，今天的重点还是在，<strong>布局</strong>。</p>
 <p>给大家一个我们常用的网页布局列表</p>
-<p><img src="/images/traditional-layout.gif" alt=""></p>
+<p><img src="/images/traditional-layout.gif" alt></p>
 <p>感觉大家脑海里都疯狂的在想怎么用 <code>float</code>，怎么用<code>postion</code>，还要考虑怎么解决被他们引起的父级元素塌陷问题，想要知道解决方案的可以看<a href="http://www.ruanyifeng.com/blog/2009/04/float_clearing.html" target="_blank" rel="noopener">这里</a>。</p>
 <p>没错，最原始的 layout 解决方案，我们都是基于 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" target="_blank" rel="noopener">css 盒模型</a>, 依赖 <code>display</code>，<code>float</code> 以及 <code>position</code>属性，来实现的。但是用他们来解决<strong>垂直居中</strong>以及<strong>响应式布局</strong>就显得尤其地不方便。</p>
 <p>那，2009年 W3C 就提出了一种新的方案 – <strong>Flex layout</strong>，它可以用简洁地代码快速响应各种的页面布局。目前已经被主流的浏览器所兼容，当然如果你不是很确定，可以使用 <a href="https://caniuse.com/#search=flex" target="_blank" rel="noopener">Can I Use</a> 很方便的查找它的兼容性。</p>
@@ -504,7 +504,7 @@
 <h1 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h1><p><code>Flexbox</code> 的布局实现并不是一个模块上单独的一个属性，而是指<strong>结合多个模块的属性来实现的(一般指父子模块的组合)</strong>。有些属性是设置在父元素（<code>flex container</code>）上，而另一些是设置在子元素（<code>flex items</code>）上。</p>
 <p>上面我们介绍过，传统的 css 布局，是依靠 <code>display</code> 的属性值：<code>block</code> 和 <code>inline</code>, 并且会依据从左向右，从上到下的方向来布局（当然使用一些特殊的 css 属性会改变这一顺序，例如 <code>float</code>，<code>position</code>）。</p>
 <p>但是<code>flex</code>布局是有自己的一套布局流方式，称为<code>flex-flow directions</code>。就是说 <strong>flex 布局内部的 items 会根据主轴（<code>main axis</code>）的方向(从 <code>main-start</code> 到 <code>main-end</code>)以及交叉轴（<code>cross axis</code>）的方向（从<code>cross-start</code> 到 <code>cross-end</code>）来进行放置的</strong>。我会利用下面👇的图，来详细解释这个概念。</p>
-<p><img src="/images/flexbox.png" alt=""></p>
+<p><img src="/images/flexbox.png" alt></p>
 <ul>
 <li><code>flex container</code>: 指标记为<code>display:flex</code>的 DOM 元素。</li>
 <li><code>flex item</code>: container 内部的<strong>直接子元素</strong>。</li>
@@ -530,7 +530,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex; <span class="comment">/* or inline-flex */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h2><p>它建立了整个 flex 上下文中的主轴（<code>main-axis</code>），从而定义了放置 items 在 container 中的方向。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/flex-direction.svg" alt=""></p>
+<p><img src="/images/flex-direction.svg" alt></p>
 <ul>
 <li><code>row</code>(默认值)：<ul>
 <li>在设置了属性<code>ltr</code>的情况下，<code>main-start</code> 在左，<code>main-end</code>在右</li>
@@ -556,7 +556,7 @@
 </li>
 </ul>
 <h2 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h2><p>在默认的情况下，items 会尝试在 container 里面放在一条轴线上，不会换行显示。你可以改变 <code>flex-wrap</code> 的值来使 items 换行显示。</p>
-<p><img src="\images\flex-wrap.svg" alt=""></p>
+<p><img src="\images\flex-wrap.svg" alt></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>nowrap</code>（默认值）：所有的 items 都会强行放在一行（列）</li>
@@ -574,7 +574,7 @@
 <h2 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h2><p>这个属性是 <code>flex-direction</code> 和 <code>flex-wrap</code> 的结合起来的简写模式。默认值是 <code>row nowrap</code>。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-flow: &lt;'flex-direction'&gt; || &lt;'flex-wrap'&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h2><p>这个属性定义了主轴（<code>main-axis</code>）方向上，items 的对齐方式。并且可以帮助 container 去分配除过 items 所占有的剩余空间。</p>
-<p><img src="\images\justify-content.svg" alt=""></p>
+<p><img src="\images\justify-content.svg" alt></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around | space-evenly;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>flex-start</code> (默认值)：从主轴的起点（ <code>main-start</code>的位置）开始放置 items</li>
@@ -585,7 +585,7 @@
 <li><code>space-evenly</code>：items 均匀分布在主轴上，所以任意两个 item 之间的间距（包括 item 与边框的间距）都相等。这个可以对比一下 <code>space-around</code>一起理解，并且目前支持它的浏览器版本有限。</li>
 </ul>
 <h2 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h2><p>这个属性定义了 items 在交叉轴（<code>cross-axis</code>）上的对齐方式，功能几乎等同于<code>justify-content</code>, 只不过是针对交叉轴（<code>cross-axis</code>）。</p>
-<p><img src="\images\align-items.svg" alt=""></p>
+<p><img src="\images\align-items.svg" alt></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">align-items</span>: stretch | flex-start | flex-end | center | baseline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>stretch</code>（默认值）：拉伸 item 的宽度或高度去填充 contianer. 仍然遵循 <code>max-width</code>(<code>max-height</code>) 以及 <code>min-width</code>(<code>min-height</code>)</li>
@@ -595,7 +595,7 @@
 <li><code>baseline</code>：items 是按照 item 第一行文字自身的基线来对齐的。（这个听起来有点抽象，之后会查些资料做补充）</li>
 </ul>
 <h2 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h2><p>当交叉轴（<code>cross-axis</code>）还有多余空间时，将 container 中的多行进行对齐，类似于对单个 item 在主轴上的 <code>justify-content</code>.</p>
-<p><img src="\images\align-content.svg" alt=""></p>
+<p><img src="\images\align-content.svg" alt></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around |stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>flex-start</code>：从交叉轴的起点（<code>cross-start</code> 的位置）开始放置多行 items。</li>
@@ -616,12 +616,12 @@
 <li>align-self</li>
 </ul>
 <h2 id="order"><a href="#order" class="headerlink" title="order"></a>order</h2><p>默认情况下，items 的顺序是根据代码里面的 DOM 顺序来排列的。然而，order属性是可以控制 items 在 flex container 的顺序。<strong>数值取整数，值越小，排列越靠前。</strong> 默认值为0。</p>
-<p><img src="\images\order.svg" alt=""></p>
+<p><img src="\images\order.svg" alt></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: &lt;integer&gt;; <span class="comment">/* default is 0 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h2><p>这个属性定义了 item 在必要时的增长能力，就是<strong>放大比例值</strong>。</p>
 <p><strong>默认值是0，表示就算用剩余空间也不会放大。</strong></p>
 <p>如果所有的 items 的 <code>flex-grow</code> 都设为1，那 contianer 里面剩余的空间会等分给所有的 items。但是如果其中一个 item 的值被设为 2，那它占用的剩余空间是比别的 items 的两倍。(负数是不合法的)</p>
-<p><img src="\images\flex-grow.svg" alt=""></p>
+<p><img src="\images\flex-grow.svg" alt></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-grow</span>: &lt;number&gt;; <span class="comment">/* default 0 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h2><p>这个属性定义了 item 在必要时的收缩能力，就是<strong>缩小比例值</strong>。</p>
 <p><strong>默认值为1，表示一旦空间不够，item 就会缩小。</strong></p>
@@ -641,7 +641,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex</span>: none | [&lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>官方推荐是使用这个简写的方式，因为它会默认的设置其它两个值。</p>
 <h2 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h2><p>这个值允许为<strong>单个 item 设置对齐方式</strong>，会覆盖默认的对齐方式（或者 <code>align-items</code> 设置的对齐方式）</p>
-<p><img src="\images\align-self.svg" alt=""></p>
+<p><img src="\images\align-self.svg" alt></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">  align-self: auto | flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>auto</code>（默认值）：表示继承父元素的 <code>align-items</code>, 如果没有父元素，等同于 <code>stretch</code>。</li>
@@ -766,11 +766,11 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="X™Qiღn">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="XinQiღn™">
             
-              <p class="site-author-name" itemprop="name">X™Qiღn</p>
+              <p class="site-author-name" itemprop="name">XinQiღn™</p>
               <p class="site-description motion-element" itemprop="description">Keep recording travel, summary what I learned and share technology</p>
           </div>
 
@@ -781,7 +781,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -793,8 +793,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -845,7 +843,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -938,7 +938,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-heartbeat"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">X™Qiღn</span>
+  <span class="author" itemprop="copyrightHolder">XinQiღn™</span>
 
   
     <span class="post-meta-divider">|</span>
@@ -946,7 +946,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">24k</span>
+    <span title="Symbols count total">26k</span>
   
 
   

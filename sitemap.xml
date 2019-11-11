@@ -2,37 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.xqliu.vip/2019/11/conditional-git-config/</loc>
+    
+    <lastmod>2019-11-11T10:12:03.252Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.xqliu.vip/2019/07/fancy-terminal/</loc>
     
-    <lastmod>2019-07-24T15:31:42.192Z</lastmod>
+    <lastmod>2019-07-24T15:31:42.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.xqliu.vip/2019/01/d3-with-react/</loc>
     
-    <lastmod>2019-07-24T15:20:22.696Z</lastmod>
+    <lastmod>2019-07-24T15:20:22.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.xqliu.vip/2019/04/tdd/</loc>
     
-    <lastmod>2019-07-24T15:19:46.476Z</lastmod>
+    <lastmod>2019-07-24T15:19:46.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.xqliu.vip/2018/08/css-flex/</loc>
     
-    <lastmod>2019-07-24T15:15:00.787Z</lastmod>
+    <lastmod>2019-07-24T15:15:00.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.xqliu.vip/2019/01/d3-i-know/</loc>
     
-    <lastmod>2019-07-24T15:04:03.450Z</lastmod>
+    <lastmod>2019-07-24T15:04:03.000Z</lastmod>
     
   </url>
   
