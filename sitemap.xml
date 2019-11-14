@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.xqliu.vip/2018/08/css-flex/</loc>
+    
+    <lastmod>2019-11-14T02:57:30.207Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.xqliu.vip/2019/11/conditional-git-config/</loc>
     
-    <lastmod>2019-11-11T10:12:03.252Z</lastmod>
+    <lastmod>2019-11-14T02:56:29.848Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>http://blog.xqliu.vip/2019/04/tdd/</loc>
     
     <lastmod>2019-07-24T15:19:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.xqliu.vip/2018/08/css-flex/</loc>
-    
-    <lastmod>2019-07-24T15:15:00.000Z</lastmod>
     
   </url>
   
