@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="zjFKVFpIAnzGA1H6oKGPqfBb0jl2W1OqXi3DBH1JB-k">
+
+
+
+  <meta name="msvalidate.01" content="CD3CED86A0AACB9918F2C1576AB1EC9F">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true,"width":300},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在 2020 年的今天，如果没有大量的数据存储，机器学习就是一场空谈。当我们谈论大数据量存储的时候，我们就会考虑选择怎么样的基础架构才能降低大量数据存储所带来的耗时以及费用昂贵的问题。Google 推出了一种全托管式云数据仓库 – BigQuery">
+<meta name="keywords" content="machine-learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BigQuery 入门">
+<meta property="og:url" content="http://blog.xqliu.vip/2020/03/bigquery-basic/index.html">
+<meta property="og:site_name" content="旅 • 學 • 技">
+<meta property="og:description" content="在 2020 年的今天，如果没有大量的数据存储，机器学习就是一场空谈。当我们谈论大数据量存储的时候，我们就会考虑选择怎么样的基础架构才能降低大量数据存储所带来的耗时以及费用昂贵的问题。Google 推出了一种全托管式云数据仓库 – BigQuery">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-09T06:01:09.132Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BigQuery 入门">
+<meta name="twitter:description" content="在 2020 年的今天，如果没有大量的数据存储，机器学习就是一场空谈。当我们谈论大数据量存储的时候，我们就会考虑选择怎么样的基础架构才能降低大量数据存储所带来的耗时以及费用昂贵的问题。Google 推出了一种全托管式云数据仓库 – BigQuery">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.xqliu.vip/2020/03/bigquery-basic/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>BigQuery 入门 | 旅 • 學 • 技</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-144478086-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-144478086-1');
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旅 • 學 • 技</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-university"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-hashtag"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th-large"></i> <br>Categories</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.xqliu.vip/2020/03/bigquery-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XinQiღn™">
+      <meta itemprop="description" content="Keep recording travel, summary what I learned and share technology">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旅 • 學 • 技">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BigQuery 入门
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: Mar 8, 2020 19:33:39" itemprop="dateCreated datePublished" datetime="2020-03-08T19:33:39+08:00">Mar 8, 2020</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/2020/03/bigquery-basic/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/bigquery-basic/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon" title="Views">
+            <i class="fa fa-eye"></i>
+            
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article">4.8k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在 2020 年的今天，如果没有大量的数据存储，机器学习就是一场空谈。当我们谈论大数据量存储的时候，我们就会考虑选择怎么样的基础架构才能降低大量数据存储所带来的耗时以及费用昂贵的问题。Google 推出了一种全托管式云数据仓库 – BigQuery</p>
+<a id="more"></a>
+<h1 id="What’s-BigQuery"><a href="#What’s-BigQuery" class="headerlink" title="What’s BigQuery?"></a>What’s BigQuery?</h1><p>先来看看<a href="https://cloud.google.com/bigquery/docs" target="_blank" rel="noopener">官方文档</a>的中英文简介：</p>
+<blockquote>
+<p>BigQuery is Google’s fully managed, petabyte scale, low cost analytics data warehouse. BigQuery is NoOps—there is no infrastructure to manage and you don’t need a database administrator—so you can focus on analyzing data to find meaningful insights, use familiar SQL, and take advantage of our pay-as-you-go model.</p>
+<p>BigQuery 是 Google 推出的全托管式低成本分析数据仓库，可支持 PB 级数据规模。BigQuery 无需运维：没有需要管理的基础架构，也无需指派数据库管理员。因此，您可以专注于分析数据，使用熟悉的 SQL 发掘有意义的数据洞见，并利用我们的即用即付模式。</p>
+</blockquote>
+<p>由以上简介的内容来看，BigQuery 可以解释为存放于 Google Cloud 的企业级数据仓库，你可以通过 Google 基础的强大处理能力实现<strong>针对数据集中的大量数据进行快速 SQL 查询</strong>。所以，使用 BigQuery 的交互方式主要是有以下三种：</p>
+<ul>
+<li>加载和导出数据</li>
+<li>查询数据</li>
+<li>管理数据</li>
+</ul>
+<p>而对于如何进行上述的数据交互，Google 提供了 4 种方式：</p>
+<ul>
+<li>Google Cloud Console 中的 <a href="https://cloud.google.com/bigquery/docs/bigquery-web-ui" target="_blank" rel="noopener">BigQuery 网页界面</a></li>
+<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/quickstarts/quickstart-web-ui-classic" target="_blank" rel="noopener">经典版网页界面</a></li>
+<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/quickstarts/quickstart-command-line" target="_blank" rel="noopener">命令行工具</a></li>
+<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/reference/rest" target="_blank" rel="noopener">REST API</a></li>
+</ul>
+<h1 id="The-structure-of-BigQuery"><a href="#The-structure-of-BigQuery" class="headerlink" title="The structure of BigQuery"></a>The structure of BigQuery</h1><p>在学习与 BigQuery 的数据交互方式之前，先来了解一下 BigQuery 内部的基础架构。</p>
+<h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2><p>Datasets 是管理和控制 tables 和 views 的顶级容器, 包含在特定的项目中。tables 或者 views 必须属于 Datasets, 因此在加载数据到 BigQuery 中，至少需要创建一个数据集。而创建数据集时需要注意以下几点：</p>
+<ul>
+<li>创建数据集时必须指定一个位置(参考 <a href="https://cloud.google.com/bigquery/docs/locations" target="_blank" rel="noopener">Datasets Loction</a>)，而位置一但确定之后，没有办法更改，但是可以<a href="https://cloud.google.com/bigquery/docs/copying-datasets" target="_blank" rel="noopener">复制 Dataset 到其他区域</a>。</li>
+<li>每个项目中的 Datasets 名字必须是唯一的。</li>
+<li>Query 中引用的 tables 必须是同一位置数据集中的表</li>
+<li>复制 table 时，源表和目标表的数据集必须在同一个位置。</li>
+</ul>
+<p>最重要的是，<strong>创建、更新或者删除数据集是不需要付费的</strong> :p。</p>
+<p>关于如何创建数据集，控制数据集的访问，Google 提供了详细的<a href="https://cloud.google.com/bigquery/docs/datasets" target="_blank" rel="noopener">文档</a></p>
+<h2 id="Tables"><a href="#Tables" class="headerlink" title="Tables"></a>Tables</h2><p>BigQuery 允许在创建 table 时指定 table schema, 或者先创建表，之后在首次加载数据时使用 RESI API 指定 schema。</p>
+<p>BigQuery 还对支持的数据格式提供自动检测的功能为 table 创建 schema加载 Avro、Parquet、ORC、Firestore 导出数据或 Datastore 导出数据时，BigQuery 会自动从数据文件中检索架构。</p>
+<p>对于 BigQuery 表的操作，有几点限制：</p>
+<ul>
+<li>每个 Datasets 的 table name 必须唯一</li>
+<li>界面化操作只支持一个 table 的复制与删除</li>
+<li>复制 table 时，目标 dataset 必须与源表在同一位置</li>
+<li>复制多个 table 到一个目标 table 时，源表的 schema 必须一致 </li>
+<li>导出 table 数据的唯一支持的目标存储是 Google cloud storage</li>
+</ul>
+<p>Table 在 BigQuery 中的费用取决于存储的数据量以及对数据运行的查询，而对于创建表，复制表以及导出表里的数据是不收取费用的。</p>
+<h3 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h3><p>除了在使用文件导入数据时可以自动检测 schema 之外，还有几种指定 table schema 的方式:</p>
+<ul>
+<li>手动使用 UI 界面 (Google Cloud Console）</li>
+<li>创建 JSON 格式的 schema 文件, 之后将 JSON 文件做为 CLI 创建 table 命令时的配置参数</li>
+<li>调用 REST API     <code>jobs.insert</code> 或者 <code>tables.insert</code> 中使用 <code>schema</code> 属性进行配置</li>
+</ul>
+<p>在指定 table schema 的时候必须提供每个列的 <strong>name</strong> 和 <strong>data type</strong>, <strong>description</strong> 和 <strong>mode</strong> 是可选项</p>
+<ul>
+<li><strong>Names</strong>: 列名只能包含字母（a-z、A-Z）、数字 (0-9) 或下划线 (_)，并且必须以字母或下划线开头。列名长度不得超过 128 个字符。列名不能重复，并且大小写不敏感。</li>
+<li><strong>Data type</strong>: 支持标准 SQL 数据类型 – <a href="https://cloud.google.com/bigquery/docs/schemas#standard_sql_data_types" target="_blank" rel="noopener">参考文档</a></li>
+<li>Description: 可选项，类型为字符串，长度最大为 1024 个字符</li>
+<li>Mode: 支持 Nullable, Required, Repeated（包含<a href="https://cloud.google.com/bigquery/docs/nested-repeated" target="_blank" rel="noopener">指定类型值的数组</a>）, 可选项，默认是Nullable</li>
+</ul>
+<p>关于几种指定 shcema 方式的具体操作和修改表的 schma，参考 <a href="https://cloud.google.com/bigquery/docs/schemas" target="_blank" rel="noopener">BigQuery 文档</a></p>
+<h3 id="Partitioned-tables"><a href="#Partitioned-tables" class="headerlink" title="Partitioned tables"></a>Partitioned tables</h3><p>Partitioned tables (分区表) 是<strong>一种将表划分为多个区段的特殊表</strong>。 分区表与常规表相比有两点优势：</p>
+<ul>
+<li>可以通过将大型表划分为较小的分区来<strong>提高查询的性能</strong></li>
+<li>通过查询读取的字节数，来<strong>控制费用</strong></li>
+</ul>
+<p>BigQuery table 有三种分区方式。</p>
+<h4 id="Ingestion-time-partitioned-table"><a href="#Ingestion-time-partitioned-table" class="headerlink" title="Ingestion-time partitioned table"></a>Ingestion-time partitioned table</h4><p>当选择 <a href="https://cloud.google.com/bigquery/docs/creating-partitioned-tables" target="_blank" rel="noopener">Ingestion time 分区表</a>时， BigQuery 会<strong>自动按照数据提取或者到达的日期进行分区</strong>。Ingestion-time 分区表包含一个名为 <code>_PARTITIONTIME</code>, 这个伪列中存储着数据加载日期的时间戳，我们可以通过修改 <code>_PARTITIONTIME</code> 列的值来重定向数据到别的分区。</p>
+<p>对于这类分区表的查询可以使用 <code>_PARTITIONTIME</code> 列来指定过滤条件，以减少查询扫描的数据量。</p>
+<h4 id="Date-or-timestamp-partitioned-tables"><a href="#Date-or-timestamp-partitioned-tables" class="headerlink" title="Date or timestamp partitioned tables"></a>Date or timestamp partitioned tables</h4><p>BigQuery 允许使用<strong>特定的 Date 列或者 timestamp 列进行分区</strong>，写入 <a href="https://cloud.google.com/bigquery/docs/creating-column-partitions" target="_blank" rel="noopener">Date/timestamp 分区表</a> 的数据会根据相应列的日期分配到对应的分区。这种分区表可以不使用伪列，可以根据分区列指定过滤条件。</p>
+<h4 id="Integer-range-partitioned-tables-（beta）"><a href="#Integer-range-partitioned-tables-（beta）" class="headerlink" title="Integer range partitioned tables （beta）"></a>Integer range partitioned tables （beta）</h4><p>BigQuery 也允许使用<strong>特定的 Integer 列，根据提供的start，end以及 interval 来分区</strong>。如果需要创建 <a href="https://cloud.google.com/bigquery/docs/creating-integer-range-partitions" target="_blank" rel="noopener">Integer-range 分区表</a>，需要提供以下各项配置：</p>
+<ul>
+<li>用于创建 integer range 分区的列名</li>
+<li>分区范围的 start 值（含边界值）</li>
+<li>分区范围的 end 值（不含边界值）</li>
+<li>分区中每个范围的阈值 interval</li>
+</ul>
+<p><strong>PS</strong>: start 和 end 之间范围的数量上限可能为 10 万。但是，由于每个范围都是一个分区，因此每个表的数据范围数量上限为 4000 个分区。</p>
+<p>对于 Date/timestamp 分区表 和 Integer-range 分区表来说，会存在两个特殊的分区：</p>
+<ul>
+<li><code>__NULL__</code> 分区：表示分区列中具有 NULL 值的行</li>
+<li><code>__UNPARTITIONED__</code> 分区：表示在允许范围之外的数据</li>
+</ul>
+<p>关于如何创建，管理，查询  partition table, 参考 <a href="https://cloud.google.com/bigquery/docs/partitioned-tables" target="_blank" rel="noopener">BigQuery 文档</a></p>
+<h2 id="Clustered-tables-WIP"><a href="#Clustered-tables-WIP" class="headerlink" title="Clustered tables - WIP"></a>Clustered tables - WIP</h2><h2 id="Views-WIP"><a href="#Views-WIP" class="headerlink" title="Views - WIP"></a>Views - WIP</h2><h1 id="Working-with-data-in-BigQuery"><a href="#Working-with-data-in-BigQuery" class="headerlink" title="Working with data in BigQuery"></a>Working with data in BigQuery</h1><h2 id="Loading-data-into-BigQuery"><a href="#Loading-data-into-BigQuery" class="headerlink" title="Loading data into BigQuery"></a>Loading data into BigQuery</h2><p>BigQuery 本身也支持不用加载就可以执行的查询，但是限制较多，很多情况下还是需要将数据加载到 BigQuery 中才能进行查询。加载数据的方式有很多种：</p>
+<ul>
+<li>从 Google Cloud Storage 加载</li>
+<li>从其他 Google 服务（例如 Google Ad Manager 和 Google Ads）加载</li>
+<li>从本地数据源加载</li>
+<li>使用<a href="https://cloud.google.com/bigquery/streaming-data-into-bigquery" target="_blank" rel="noopener">流式插入</a>功能插入各条记录</li>
+<li>使用 <a href>DML(Data Manipulation Language)</a> 语句执行批量插入</li>
+<li>在 Dataflow 流水线中使用 <a href="https://beam.apache.org/documentation/io/built-in/google-bigquery/" target="_blank" rel="noopener">BigQuery I/O</a> 转换将数据写入 BigQuery</li>
+</ul>
+<p><strong>Notes</strong>: 加载数据时可以将数据加载到新的表或分区或者将数据附加到现有的表或分区，也可以覆盖某个表或分区。具体详见 <a href="https://cloud.google.com/bigquery/docs/managing-partitioned-tables" target="_blank" rel="noopener">Manage partitioned tables</a></p>
+<p>目前，对于从文件加载数据我们只支持 Google Cloud Storage 和 本地数据源，并且支持的数据格式只有以下几种：</p>
+<ul>
+<li>Cloud Storage: Avro，CSV， JSON (仅限换行符分隔格式)， ORC，Parquet，Datastore exports，Firestore exports</li>
+<li>本地数据源: Avro，CSV， JSON (仅限换行符分隔格式)，ORC，Parquet</li>
+</ul>
+<p>加载数据时的默认格式是 CSV，并且数据加载时也有相对应的限制，具体参考<a href="https://cloud.google.com/bigquery/docs/loading-data" target="_blank" rel="noopener">BigQuery 文档</a></p>
+<h2 id="Query-data-from-BigQuery"><a href="#Query-data-from-BigQuery" class="headerlink" title="Query data from BigQuery"></a>Query data from BigQuery</h2><p>BigQuery 的查询方式主要有两种：</p>
+<ul>
+<li><strong>交互式查询</strong>：查询会尽快执行</li>
+<li><strong>批量查询</strong>：将每个批量查询排成队列，并在 BigQuery 共享资源池中有空闲资源可用时尽快开始查询</li>
+</ul>
+<h3 id="Query-dry-run"><a href="#Query-dry-run" class="headerlink" title="Query dry run"></a>Query dry run</h3><p><strong>BigQuery 会根据处理的字节数作为查询费用的指标</strong>，所以 BigQuery 会提供试运行查询返回处理字节数的预估值，之后可以使用价格计算器计算查询费用。试运行查询操作不会收取费用。</p>
+<p>除了界面化会直接显示试运行查询结果外，还可以使用以下方式：</p>
+<ul>
+<li>在 CLI 的 query 命令里使用 <code>--dry_run</code> 标志</li>
+<li>API 中使用 <code>dryRun</code> 参数</li>
+</ul>
+<h3 id="Query-results"><a href="#Query-results" class="headerlink" title="Query results"></a>Query results</h3><p>BigQuery 的查询结果会全部保存在 table 中，可以是<strong>永久表</strong>，也可以是<strong>临时表</strong></p>
+<ul>
+<li><strong>临时表</strong>：是保存在特殊 Datasets 里面的随机命名表，用来缓存查询结果。生命周期大约为 24 个小时</li>
+<li><strong>永久表</strong>：是有权限访问的任何 Datasets 中的新 table 或者已有的 table, 对于已有的 table，可以追加数据也可以覆盖数据</li>
+</ul>
+<p>目前 BigQuery 提供三种下载查询结果的方式：</p>
+<ul>
+<li>下载到本地文件</li>
+<li>保存到 Google drive - beta</li>
+<li>保存到 Google sheets</li>
+</ul>
+<p><strong>Notes</strong>: 如果查询结果保存在临时表里，当执行重复查询的时候，BigQuery 会尝试使用缓存的结果。详细内容查询 <a href="https://cloud.google.com/bigquery/docs/cached-results" target="_blank" rel="noopener">BigQuery 官方文档</a></p>
+<h3 id="Parameterized-queries-–-WIP"><a href="#Parameterized-queries-–-WIP" class="headerlink" title="Parameterized queries – WIP"></a>Parameterized queries – WIP</h3><h3 id="Querying-multiple-tables-using-a-wildcard-–-WIP"><a href="#Querying-multiple-tables-using-a-wildcard-–-WIP" class="headerlink" title="Querying multiple tables using a wildcard – WIP"></a>Querying multiple tables using a wildcard – WIP</h3><h1 id="CLI-bq"><a href="#CLI-bq" class="headerlink" title="CLI - bq"></a>CLI - bq</h1><p>It will come soon.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://cloud.google.com/bigquery/docs" target="_blank" rel="noopener">BigQuery documentation</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine-learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/conditional-git-config/" rel="next" title="使用有条件的 .gitconfig">
+                <i class="fa fa-chevron-left"></i> 使用有条件的 .gitconfig
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="XinQiღn™">
+            
+              <p class="site-author-name" itemprop="name">XinQiღn™</p>
+              <p class="site-description motion-element" itemprop="description">Keep recording travel, summary what I learned and share technology</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/crystalynliu" title="GitHub &rarr; https://github.com/crystalynliu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:crystalynliu@163.com" title="E-Mail &rarr; mailto:crystalynliu@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What’s-BigQuery"><span class="nav-number">1.</span> <span class="nav-text">What’s BigQuery?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-structure-of-BigQuery"><span class="nav-number">2.</span> <span class="nav-text">The structure of BigQuery</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Datasets"><span class="nav-number">2.1.</span> <span class="nav-text">Datasets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tables"><span class="nav-number">2.2.</span> <span class="nav-text">Tables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schema"><span class="nav-number">2.2.1.</span> <span class="nav-text">Schema</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partitioned-tables"><span class="nav-number">2.2.2.</span> <span class="nav-text">Partitioned tables</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ingestion-time-partitioned-table"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">Ingestion-time partitioned table</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Date-or-timestamp-partitioned-tables"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">Date or timestamp partitioned tables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Integer-range-partitioned-tables-（beta）"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">Integer range partitioned tables （beta）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clustered-tables-WIP"><span class="nav-number">2.3.</span> <span class="nav-text">Clustered tables - WIP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Views-WIP"><span class="nav-number">2.4.</span> <span class="nav-text">Views - WIP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Working-with-data-in-BigQuery"><span class="nav-number">3.</span> <span class="nav-text">Working with data in BigQuery</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Loading-data-into-BigQuery"><span class="nav-number">3.1.</span> <span class="nav-text">Loading data into BigQuery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Query-data-from-BigQuery"><span class="nav-number">3.2.</span> <span class="nav-text">Query data from BigQuery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-dry-run"><span class="nav-number">3.2.1.</span> <span class="nav-text">Query dry run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-results"><span class="nav-number">3.2.2.</span> <span class="nav-text">Query results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameterized-queries-–-WIP"><span class="nav-number">3.2.3.</span> <span class="nav-text">Parameterized queries – WIP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Querying-multiple-tables-using-a-wildcard-–-WIP"><span class="nav-number">3.2.4.</span> <span class="nav-text">Querying multiple tables using a wildcard – WIP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CLI-bq"><span class="nav-number">4.</span> <span class="nav-text">CLI - bq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XinQiღn™</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">31k</span>
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+  <script id="dsq-count-scr" src="https://crystalynliu.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://blog.xqliu.vip/2020/03/bigquery-basic/";
+    this.page.identifier = "2020/03/bigquery-basic/";
+    this.page.title = 'BigQuery 入门';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://crystalynliu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
