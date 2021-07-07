@@ -111,7 +111,8 @@
 <meta property="og:image" content="http://blog.xqliu.vip/images/agnoster-theme.png">
 <meta property="og:image" content="http://blog.xqliu.vip/images/font-setting.jpg">
 <meta property="og:image" content="http://blog.xqliu.vip/images/color-presets.png">
-<meta property="og:updated_time" content="2019-07-24T15:31:42.000Z">
+<meta property="og:image" content="http://blog.xqliu.vip/images/auto-suggestion-issue.png">
+<meta property="og:updated_time" content="2021-07-07T14:40:18.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建 Colorful Terminal (iTerm2 + oh-my-zsh)">
 <meta name="twitter:description" content="作为一名在 macOS 下工作的码农，有一句名言很实用  工欲善其事，必先利其器。  首先需要做的就是让编码的工具使用率变得更高，更快以及更自动化。今天来谈谈怎么配置 Terminal。">
@@ -448,7 +449,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">3.5k</span>
+                <span title="Symbols count in article">4k</span>
               
 
               
@@ -494,7 +495,7 @@
 <p>  <code>iTerm2</code> menu -&gt; <code>Preferences</code> -&gt; <code>Profiles</code> -&gt; <code>General</code> 标签页中的 <code>Working Directory</code> 选择 <code>Reuse previous session&#39;s directory</code></p>
 </li>
 </ul>
-<p>现在，Terminal 就可以退出舞台，后面所有使用命令行的时候就由 iTerm2 来替代了。    </p>
+<p>现在，Terminal 就可以退出舞台，后面所有使用命令行的时候就由 iTerm2 来替代了。</p>
 <h1 id="Oh-My-Zsh"><a href="#Oh-My-Zsh" class="headerlink" title="Oh My Zsh"></a><a href="https://ohmyz.sh/" target="_blank" rel="noopener">Oh My Zsh</a></h1><p>默认的 bash 命令是黑白色的。但是我们更期望在用不同的颜色表示不同的文件（unix 是文件系统哦）。并且它有很强大的插件和工具，可以美观 interface 以及简化我们的操作。</p>
 <h2 id="How-to-install-1"><a href="#How-to-install-1" class="headerlink" title="How to install"></a>How to install</h2><ul>
 <li><p>via curl</p>
@@ -510,7 +511,7 @@
 <li><p>需要修改 <code>~/.zshrc</code> 文件，找到有一个关于主题的变量, default 值是<code>robbyrussell</code>, 可以修改这个变量为你喜欢的主题。</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=&quot;agnoster&quot;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>重新启动 Terminal，你就会看到一个全新的 Terminal    </p>
+<li><p>重新启动 Terminal，你就会看到一个全新的 Terminal</p>
 <p> <img src="/images/agnoster-theme.png" alt></p>
 </li>
 </ol>
@@ -533,7 +534,7 @@
 <p>完整的别名列表请参考官方文档：<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git/#aliases" target="_blank" rel="noopener">git Aliases</a></p>
 <h3 id="z"><a href="#z" class="headerlink" title="z"></a>z</h3><p>在打开 Terminal 后， 你是怎么进入工作目录的？是 <code>cd xx/xx/xx...</code>, <code>^R</code> 还是通过使用alias？</p>
 <p><strong>z</strong> 的出现可以帮助你快速进入目录，例如在我的电脑上使用 <code>z cask</code> 命令就会进入<code>/usr/local/Caskroom</code> 目录。</p>
-<p><strong>z</strong> 是 <strong>oh-my-zsh</strong> 默认安装，只需要更改配置，重新加载 Terminal。就可以使用了。  </p>
+<p><strong>z</strong> 是 <strong>oh-my-zsh</strong> 默认安装，只需要更改配置，重新加载 Terminal。就可以使用了。</p>
 <h3 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h3><p>既然要做 colorful terminal, 那我们就要做到极致。<strong><a href="https://github.com/zsh-users/zsh-syntax-highlighting" target="_blank" rel="noopener">zsh-syntax-highlighting</a></strong> 是为 zsh 的 shell 命令提供高亮的功能，它可以在 zsh 提示符下键入 cammand 时高亮显示到 Terminal，并且会在命令执行前进行检查，将错误的 cammand 高亮为红色。</p>
 <p>怎么将插件安装到 <strong>oh-my-zsh</strong>，然后配置它呢?</p>
 <ul>
@@ -544,6 +545,19 @@
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=( [plugins...] zsh-syntax-highlighting)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="zsh-autosuggestion"><a href="#zsh-autosuggestion" class="headerlink" title="zsh-autosuggestion"></a>zsh-autosuggestion</h3><p>还有一个非常有用的插件推荐给大家。Auto Suggestion, 当你输入命令的时候，你可以看到光标有一个浅灰色的命令可以用以补全。这个命令是你最近使用过的命令。</p>
+<p>怎么安装到 <strong>oh-may-zsh</strong>?</p>
+<ul>
+<li><p>将插件的 repo 拷贝到 <strong>oh-my-zsh</strong> 的插件目录下</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>~/.zshrc</code> 激活 plugin</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=( [plugins...] zsh-autosuggestions)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>Notes:</strong> 如果你在使用 iTerm2 的时候发现不能正常显示灰色的命令，而是变成跟 terminal 窗口一个颜色, 这是一个已知问题，是由于颜色错误引起的，详细内容可以参考<a href="https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style" target="_blank" rel="noopener">文档</a>。</p>
+<p>简单来说就是将下图中的 <code>Basic Colors &gt; Background</code> 颜色和 <code>ANSI Colors &gt; Black &gt; Bright</code> 设置成不一样的颜色即可。</p>
+<p><img src="/images/auto-suggestion-issue.png" alt></p>
 <h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>写这篇文章的初衷，仅仅是因为我刚刚对我的 Terminal 进行了配置，害怕忘记。以为很快就可以的文章，也写了 4，5 个小时。在这个过程中会去找各种参考，会去配上各类官方链接，慢慢地它就变成了一篇给大家看的文章。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="https://github.com/macdao/ocds-guide-to-setting-up-mac" target="_blank" rel="noopener">Guide to setup Mac</a></li>
@@ -808,7 +822,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iTerm2"><span class="nav-number">1.</span> <span class="nav-text">iTerm2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-install"><span class="nav-number">1.1.</span> <span class="nav-text">How to install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Settings"><span class="nav-number">1.2.</span> <span class="nav-text">Settings</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Oh-My-Zsh"><span class="nav-number">2.</span> <span class="nav-text">Oh My Zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-install-1"><span class="nav-number">2.1.</span> <span class="nav-text">How to install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Settings-1"><span class="nav-number">2.2.</span> <span class="nav-text">Settings</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Themes"><span class="nav-number">2.2.1.</span> <span class="nav-text">Themes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Powerline-Fonts"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">Powerline Fonts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配色方案"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">配色方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-目录的颜色"><span class="nav-number">2.2.2.</span> <span class="nav-text">ls 目录的颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim-编辑器的颜色"><span class="nav-number">2.2.3.</span> <span class="nav-text">Vim 编辑器的颜色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plugins"><span class="nav-number">2.3.</span> <span class="nav-text">Plugins</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git"><span class="nav-number">2.3.1.</span> <span class="nav-text">git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#z"><span class="nav-number">2.3.2.</span> <span class="nav-text">z</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh-syntax-highlighting"><span class="nav-number">2.3.3.</span> <span class="nav-text">zsh-syntax-highlighting</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#End"><span class="nav-number">3.</span> <span class="nav-text">End</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iTerm2"><span class="nav-number">1.</span> <span class="nav-text">iTerm2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-install"><span class="nav-number">1.1.</span> <span class="nav-text">How to install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Settings"><span class="nav-number">1.2.</span> <span class="nav-text">Settings</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Oh-My-Zsh"><span class="nav-number">2.</span> <span class="nav-text">Oh My Zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-install-1"><span class="nav-number">2.1.</span> <span class="nav-text">How to install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Settings-1"><span class="nav-number">2.2.</span> <span class="nav-text">Settings</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Themes"><span class="nav-number">2.2.1.</span> <span class="nav-text">Themes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Powerline-Fonts"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">Powerline Fonts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配色方案"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">配色方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-目录的颜色"><span class="nav-number">2.2.2.</span> <span class="nav-text">ls 目录的颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim-编辑器的颜色"><span class="nav-number">2.2.3.</span> <span class="nav-text">Vim 编辑器的颜色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plugins"><span class="nav-number">2.3.</span> <span class="nav-text">Plugins</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git"><span class="nav-number">2.3.1.</span> <span class="nav-text">git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#z"><span class="nav-number">2.3.2.</span> <span class="nav-text">z</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh-syntax-highlighting"><span class="nav-number">2.3.3.</span> <span class="nav-text">zsh-syntax-highlighting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh-autosuggestion"><span class="nav-number">2.3.4.</span> <span class="nav-text">zsh-autosuggestion</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#End"><span class="nav-number">3.</span> <span class="nav-text">End</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -835,7 +849,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heartbeat"></i>
   </span>
