@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
@@ -19,7 +20,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="如果你是一个 Git 重度依赖患者，这篇文章会告诉你如何避免提交错误的 email 给某个 repo 的 commit。让我们彻底区分开工作与生活。  No more accidentally committing with the wrong email in a new repository">
 <meta property="og:type" content="article">
@@ -140,12 +141,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -255,7 +256,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>1.5k</span>
+      <span></span>
     </span>
 </div>
 
@@ -269,39 +270,35 @@
 <blockquote>
 <p>No more accidentally committing with the wrong email in a new repository</p>
 </blockquote>
-<span id="more"></span>
-
+<a id="more"></a>
 <h1 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h1><p>在使用 Git 工具之前，我们会预先设置一个全局的 <code>git email</code> 和 <code>username</code>，这个可能是你的<strong>私人邮箱</strong>或者是<strong>工作邮箱</strong>。但是你只能选择一个来设置。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config email --global &lt;your.email&gt;</span><br><span class="line">git config username --global &lt;your.username&gt;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config email --global &lt;your.email&gt;</span><br><span class="line">git config username --global &lt;your.username&gt;</span><br></pre></td></tr></table></figure>
 <p>但如果你生活和工作使用同一台电脑工作，经常会有这样的事情，创建一个新的 repo, 这个 repo 可能是工作需要，但是你的 Git 原先的设置是私人邮箱，这个时候，会出现两种情况:</p>
 <ul>
 <li>你忘记了这件事情，你会使用全局配置提交 commit, 之后就会发现 commit 的提交上会出现你的私人邮箱，这是不专业的。</li>
 <li>你想起来了这件事情，所以你会使用 <code>git config email &lt;your.work.email&gt;</code> 去修改当前 repo config 设置。</li>
 </ul>
 <p>那是不是会有更灵活的方式呢？</p>
-<h1 id="One-solution"><a href="#One-solution" class="headerlink" title="One solution"></a>One solution</h1><p>在<code>Git 2.13</code> 以上的版本，<code>.gitconfig</code> 支持 <a href="https://git-scm.com/docs/git-config#_conditional_includes">Conditional Includes</a> 的语法，可以使用 <code>includeIf.&lt;condition&gt;.path</code> 的语法在特定的条件下复写  global 的配置。</p>
+<h1 id="One-solution"><a href="#One-solution" class="headerlink" title="One solution"></a>One solution</h1><p>在<code>Git 2.13</code> 以上的版本，<code>.gitconfig</code> 支持 <a href="https://git-scm.com/docs/git-config#_conditional_includes" target="_blank" rel="noopener">Conditional Includes</a> 的语法，可以使用 <code>includeIf.&lt;condition&gt;.path</code> 的语法在特定的条件下复写  global 的配置。</p>
 <p>如果我们对自己的电脑整理妥当，那么我们经常会将工作放在一个特定的文件夹下面，例如 <code>~/works</code>。这样我们可以针对这个特定的文件夹，创建一个包含特定 email 的 <code>.gitconfig</code>。那到底要怎么配置呢？</p>
 <ol>
 <li><p><strong>创建一个特定的 .gitConfig</strong></p>
 <p> 首先，我们需要创建一个 <code>.gitconfig</code> 文件适用于 <code>~/works</code> 文件夹，这个文件放置的位置并不重要，你可以选择放置在 <code>HOME</code> path, 也可以选择放置在 <code>~/works</code> 文件夹下面。</p>
 <p> 按照我的习惯，我将它放置在 <code>HOME</code> path, 起名为 <code>.gitConfig-work</code>， 并写入想要被复习的配置：</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">	name = &lt;your.name&gt;</span><br><span class="line">	email = &lt;your.work.email&gt;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">	name = &lt;your.name&gt;</span><br><span class="line">	email = &lt;your.work.email&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>为<code>~/works</code>文件夹设置<code>conditional includes</code></strong></p>
 <p> 接下来，我们需要在 gloabl <code>.gitconfig</code> 文件里，追加一些配置来告诉 Git，当我们工作在 <code>~/works</code> 文件夹下面的时候，应该使用 <code>.gitconfig-work</code> 的配置项。</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[includeIf &quot;gitdir:~/works/&quot;]</span><br><span class="line">	path = ~/.gitconfig-work</span><br></pre></td></tr></table></figure>
-
-
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[includeIf &quot;gitdir:~/works/&quot;]</span><br><span class="line">	path = ~/.gitconfig-work</span><br></pre></td></tr></table></figure>
 <p> 这个配置表明当你工作的位置处于 <code>~/works</code> 文件夹下面的时候，<code>.gitconfig-work</code> 的配置项会复写 <code>.gitconfig</code> 中的配置，这时，当你在 <code>~/works</code> 文件夹下面创建新的 repo 并发生提交时，你可以看到 email 会默认变成工作邮箱。</p>
 </li>
 </ol>
 <p>以上的两步，就可以帮助你解决工作时提交错误邮箱的尴尬事情！</p>
 <h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>当然，强大的 Git 还有更多的功能等待我们学习。<code>includeIf</code> 不仅仅只有一个参数 <code>gitdir</code>, 还包括 <code>gitdir/i</code> 关键字来进行匹配。</p>
-<p>更多的配置，希望大家查看 <a href="https://git-scm.com/docs/git-config#_conditional_includes">git config</a>。</p>
+<p>更多的配置，希望大家查看 <a href="https://git-scm.com/docs/git-config#_conditional_includes" target="_blank" rel="noopener">git config</a>。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://blog.jiayu.co/2019/02/conditional-git-configuration/">Conditional Git Configuration</a></li>
-<li><a href="https://stackoverflow.com/questions/13750953/is-it-possible-to-configure-user-name-and-user-email-per-wildcard-domains-in-gi">Configure user.name and user.email per wildcard domains in .gitconfig</a></li>
+<li><a href="https://blog.jiayu.co/2019/02/conditional-git-configuration/" target="_blank" rel="noopener">Conditional Git Configuration</a></li>
+<li><a href="https://stackoverflow.com/questions/13750953/is-it-possible-to-configure-user-name-and-user-email-per-wildcard-domains-in-gi" target="_blank" rel="noopener">Configure user.name and user.email per wildcard domains in .gitconfig</a></li>
 </ul>
 
     </div>
@@ -363,7 +360,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">33k</span>
+    <span title="Word count total">NaNm</span>
   </span>
 </div>
 <div class="busuanzi-count">

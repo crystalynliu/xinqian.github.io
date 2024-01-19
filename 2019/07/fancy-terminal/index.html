@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
@@ -19,7 +20,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="作为一名在 macOS 下工作的码农，有一句名言很实用  工欲善其事，必先利其器。  首先需要做的就是让编码的工具使用率变得更高，更快以及更自动化。今天来谈谈怎么配置 Terminal。">
 <meta property="og:type" content="article">
@@ -145,12 +146,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -260,7 +261,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>3.7k</span>
+      <span></span>
     </span>
 </div>
 
@@ -275,15 +276,12 @@
 <p>工欲善其事，必先利其器。</p>
 </blockquote>
 <p>首先需要做的就是让编码的工具使用率变得更高，更快以及更自动化。<br>今天来谈谈怎么配置 Terminal。</p>
-<span id="more"></span>
-
-
-<h1 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a><a href="https://www.iterm2.com/">iTerm2</a></h1><p>MacOS 自带的 Terminal 是很正规的<strong>白底黑字</strong>， 对于我这种已经习惯<strong>黑底白字</strong>的码农来说是不友好的，并且没有更多颜色特性表现不同的特性。所以在第一时间知道 <strong>iTerm2</strong> 的时候就果断抛弃了 Terminal，从此被打入冷宫:p</p>
-<p>并且 iTerm2 拥有一些非常实用的 <a href="https://www.iterm2.com/features.html">特性</a>, 例如 <code>split panes</code>, <code>autocomplete</code>等。至于这些特性如果使用，需要大家自行摸索。</p>
-<h2 id="How-to-install"><a href="#How-to-install" class="headerlink" title="How to install"></a>How to install</h2><p>说起来安装一些软件，在 macOS 下不得不提的就是 <a href="https://brew.sh/">Homebrew</a>, 它可以让我们很方便的使用命令行安装一些管理工具（node, mysql等）以及 macOS 的应用（例如 chrome, evernote等）。Homebrew 的使用方式就算是课外作业吧。</p>
+<a id="more"></a>
+<h1 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a><a href="https://www.iterm2.com/" target="_blank" rel="noopener">iTerm2</a></h1><p>MacOS 自带的 Terminal 是很正规的<strong>白底黑字</strong>， 对于我这种已经习惯<strong>黑底白字</strong>的码农来说是不友好的，并且没有更多颜色特性表现不同的特性。所以在第一时间知道 <strong>iTerm2</strong> 的时候就果断抛弃了 Terminal，从此被打入冷宫:p</p>
+<p>并且 iTerm2 拥有一些非常实用的 <a href="https://www.iterm2.com/features.html" target="_blank" rel="noopener">特性</a>, 例如 <code>split panes</code>, <code>autocomplete</code>等。至于这些特性如果使用，需要大家自行摸索。</p>
+<h2 id="How-to-install"><a href="#How-to-install" class="headerlink" title="How to install"></a>How to install</h2><p>说起来安装一些软件，在 macOS 下不得不提的就是 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a>, 它可以让我们很方便的使用命令行安装一些管理工具（node, mysql等）以及 macOS 的应用（例如 chrome, evernote等）。Homebrew 的使用方式就算是课外作业吧。</p>
 <p>只需要一行命令，不用上网搜索下载安装，就可以安装好想要的应用：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew cask install iterm2</span><br></pre></td></tr></table></figure>
-
 <h2 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h2><p>讲两个我很常用的设置</p>
 <ul>
 <li><p><strong>透明度(transparency)</strong></p>
@@ -296,56 +294,54 @@
 </li>
 </ul>
 <p>现在，Terminal 就可以退出舞台，后面所有使用命令行的时候就由 iTerm2 来替代了。</p>
-<h1 id="Oh-My-Zsh"><a href="#Oh-My-Zsh" class="headerlink" title="Oh My Zsh"></a><a href="https://ohmyz.sh/">Oh My Zsh</a></h1><p>默认的 bash 命令是黑白色的。但是我们更期望在用不同的颜色表示不同的文件（unix 是文件系统哦）。并且它有很强大的插件和工具，可以美观 interface 以及简化我们的操作。</p>
+<h1 id="Oh-My-Zsh"><a href="#Oh-My-Zsh" class="headerlink" title="Oh My Zsh"></a><a href="https://ohmyz.sh/" target="_blank" rel="noopener">Oh My Zsh</a></h1><p>默认的 bash 命令是黑白色的。但是我们更期望在用不同的颜色表示不同的文件（unix 是文件系统哦）。并且它有很强大的插件和工具，可以美观 interface 以及简化我们的操作。</p>
 <h2 id="How-to-install-1"><a href="#How-to-install-1" class="headerlink" title="How to install"></a>How to install</h2><ul>
 <li><p>via curl</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>via wget</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sh -c <span class="string">&quot;<span class="subst">$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)</span>&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh -c <span class="string">"<span class="variable">$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)</span>"</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h2 id="Settings-1"><a href="#Settings-1" class="headerlink" title="Settings"></a>Settings</h2><h3 id="Themes"><a href="#Themes" class="headerlink" title="Themes"></a>Themes</h3><p><strong>oh-my-zsh</strong> 现在已经拥有上百个主题样式，怎么样应用想要的主题呢？</p>
 <ol>
-<li><p>可以在 wiki 上找到所有主题的 <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes">screenshots</a>，之后挑选你喜欢的主题，推荐一个 fancy 的选择是 <code>agnoster </code>。</p>
+<li>可以在 wiki 上找到所有主题的 <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="noopener">screenshots</a>，之后挑选你喜欢的主题，推荐一个 fancy 的选择是 <code>agnoster</code>。</li>
+<li><p>需要修改 <code>~/.zshrc</code> 文件，找到有一个关于主题的变量, default 值是<code>robbyrussell</code>, 可以修改这个变量为你喜欢的主题。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=&quot;agnoster&quot;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>需要修改 <code>~/.zshrc</code> 文件，找到有一个关于主题的变量, default 值是<code>robbyrussell </code>, 可以修改这个变量为你喜欢的主题。</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=&quot;agnoster&quot;</span><br></pre></td></tr></table></figure></li>
 <li><p>重新启动 Terminal，你就会看到一个全新的 Terminal</p>
-<p> <img src="/images/agnoster-theme.png"></p>
+<p> <img src="/images/agnoster-theme.png" alt></p>
 </li>
 </ol>
-<h4 id="Powerline-Fonts"><a href="#Powerline-Fonts" class="headerlink" title="Powerline Fonts"></a><a href="https://github.com/powerline/fonts">Powerline Fonts</a></h4><p>如果发现酷酷的分支图标都变成了问号，那是因为大多数的主题都需要安装 Powerline Fonts。你可以使用下面的命令快速安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clone</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/powerline/fonts.git --depth=1</span><br><span class="line"><span class="comment"># install</span></span><br><span class="line"><span class="built_in">cd</span> fonts</span><br><span class="line">./install.sh</span><br><span class="line"><span class="comment"># clean-up a bit</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">rm</span> -rf fonts</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<h4 id="Powerline-Fonts"><a href="#Powerline-Fonts" class="headerlink" title="Powerline Fonts"></a><a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">Powerline Fonts</a></h4><p>如果发现酷酷的分支图标都变成了问号，那是因为大多数的主题都需要安装 Powerline Fonts。你可以使用下面的命令快速安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clone</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/powerline/fonts.git --depth=1</span><br><span class="line"><span class="comment"># install</span></span><br><span class="line"><span class="built_in">cd</span> fonts</span><br><span class="line">./install.sh</span><br><span class="line"><span class="comment"># clean-up a bit</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">rm -rf fonts</span><br></pre></td></tr></table></figure>
 <p>之后通过修改 font 参数就可以使用 Powerline fonts 了。</p>
-<p><img src="/images/font-setting.jpg"></p>
+<p><img src="/images/font-setting.jpg" alt></p>
 <h4 id="配色方案"><a href="#配色方案" class="headerlink" title="配色方案"></a>配色方案</h4><p>如果发现窗口的颜色不是像我一样是深蓝色，记得将 Terminal 的配色方案设置为 <code>Solarized Dark</code>。</p>
-<p><img src="/images/color-presets.png"></p>
+<p><img src="/images/color-presets.png" alt></p>
 <h3 id="ls-目录的颜色"><a href="#ls-目录的颜色" class="headerlink" title="ls 目录的颜色"></a>ls 目录的颜色</h3><p>使用<code>ls</code>命令的时候，发现还是灰蒙蒙的一片，似乎无法区分哪些是文件夹，哪些是可执行文件。如何让 <code>ls</code> 命令的结果带上颜色，在 <code>~/.zshrc</code> 文件中添加👇的配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LSCOLORS</span></span><br><span class="line"><span class="built_in">export</span> LSCOLORS=<span class="string">&quot;exfxcxdxbxexexabagacad&quot;</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span>=<span class="string">&#x27;ls -G&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="Vim-编辑器的颜色"><a href="#Vim-编辑器的颜色" class="headerlink" title="Vim 编辑器的颜色"></a>Vim 编辑器的颜色</h3><p>找到 <a href="https://github.com/altercation/vim-colors-solarized">Solarized for vim</a> 的配色方案。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LSCOLORS</span></span><br><span class="line"><span class="built_in">export</span> LSCOLORS=<span class="string">"exfxcxdxbxexexabagacad"</span></span><br><span class="line"><span class="built_in">alias</span> ls=<span class="string">'ls -G'</span></span><br></pre></td></tr></table></figure>
+<h3 id="Vim-编辑器的颜色"><a href="#Vim-编辑器的颜色" class="headerlink" title="Vim 编辑器的颜色"></a>Vim 编辑器的颜色</h3><p>找到 <a href="https://github.com/altercation/vim-colors-solarized" target="_blank" rel="noopener">Solarized for vim</a> 的配色方案。</p>
 <p>按照步骤下载之后，修改 <code>~/.vimrc</code> 文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">syntax on</span><br><span class="line"><span class="built_in">set</span> nu</span><br><span class="line"><span class="built_in">set</span> mouse=a</span><br><span class="line">colorscheme solarized</span><br></pre></td></tr></table></figure>
-
 <h2 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h2><p><strong>oh-my-zsh</strong> 有强大的插件工具，可以通过修改<code>~/.zshrc</code>文件中的 plugin 配置，来控制 plugin 是否激活，当然前提是你已经安装了相关的插件。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=(git z zsh-completions zsh-syntax-highlighting)</span><br></pre></td></tr></table></figure>
-
 <h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><p>git 的插件是默认安装的，就是说当你安装了 <strong>oh-my-zsh</strong>，就已经有了 git 插件，通过配置就可以使用它。</p>
 <p>这个 git 插件主要是用来干什么的呢？git 对于一个码农来说重要性不言而喻，几乎每个人都会使用一些方法（例如 alias）来提高效率，使用 <code>git st</code> 来替换 <code>git status</code>。但是这需要我们自己手动设置，并且根据每个人的习惯不同，设置也不完全一样。</p>
 <p><strong>oh-my-zsh</strong> 提供了一套系统别名（alias），来达到相同的功能。比如<code>gst</code>作为<code>git status</code>的别名。所以你用了 <strong>oh-my-zsh</strong> 就相当拥有了一套全球通用的 git 命令别名系统。是不是特别棒？</p>
-<p>完整的别名列表请参考官方文档：<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git/#aliases">git Aliases</a></p>
+<p>完整的别名列表请参考官方文档：<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git/#aliases" target="_blank" rel="noopener">git Aliases</a></p>
 <h3 id="z"><a href="#z" class="headerlink" title="z"></a>z</h3><p>在打开 Terminal 后， 你是怎么进入工作目录的？是 <code>cd xx/xx/xx...</code>, <code>^R</code> 还是通过使用alias？</p>
 <p><strong>z</strong> 的出现可以帮助你快速进入目录，例如在我的电脑上使用 <code>z cask</code> 命令就会进入<code>/usr/local/Caskroom</code> 目录。</p>
 <p><strong>z</strong> 是 <strong>oh-my-zsh</strong> 默认安装，只需要更改配置，重新加载 Terminal。就可以使用了。</p>
-<h3 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h3><p>既然要做 colorful terminal, 那我们就要做到极致。**<a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a>** 是为 zsh 的 shell 命令提供高亮的功能，它可以在 zsh 提示符下键入 cammand 时高亮显示到 Terminal，并且会在命令执行前进行检查，将错误的 cammand 高亮为红色。</p>
+<h3 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h3><p>既然要做 colorful terminal, 那我们就要做到极致。<strong><a href="https://github.com/zsh-users/zsh-syntax-highlighting" target="_blank" rel="noopener">zsh-syntax-highlighting</a></strong> 是为 zsh 的 shell 命令提供高亮的功能，它可以在 zsh 提示符下键入 cammand 时高亮显示到 Terminal，并且会在命令执行前进行检查，将错误的 cammand 高亮为红色。</p>
 <p>怎么将插件安装到 <strong>oh-my-zsh</strong>，然后配置它呢?</p>
 <ul>
 <li><p>将插件的 repo 拷贝到 <strong>oh-my-zsh</strong> 的插件目录下</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在 <code>~/.zshrc</code> 激活 plugin</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=( [plugins...] zsh-syntax-highlighting)</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=( [plugins...] zsh-syntax-highlighting)</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h3 id="zsh-autosuggestion"><a href="#zsh-autosuggestion" class="headerlink" title="zsh-autosuggestion"></a>zsh-autosuggestion</h3><p>还有一个非常有用的插件推荐给大家。Auto Suggestion, 当你输入命令的时候，你可以看到光标有一个浅灰色的命令可以用以补全。这个命令是你最近使用过的命令。</p>
 <p>怎么安装到 <strong>oh-may-zsh</strong>?</p>
@@ -354,15 +350,16 @@
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在 <code>~/.zshrc</code> 激活 plugin</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=( [plugins...] zsh-autosuggestions)</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=( [plugins...] zsh-autosuggestions)</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p><strong>Notes:</strong> 如果你在使用 iTerm2 的时候发现不能正常显示灰色的命令，而是变成跟 terminal 窗口一个颜色, 这是一个已知问题，是由于颜色错误引起的，详细内容可以参考<a href="https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style">文档</a>。</p>
+<p><strong>Notes:</strong> 如果你在使用 iTerm2 的时候发现不能正常显示灰色的命令，而是变成跟 terminal 窗口一个颜色, 这是一个已知问题，是由于颜色错误引起的，详细内容可以参考<a href="https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style" target="_blank" rel="noopener">文档</a>。</p>
 <p>简单来说就是将下图中的 <code>Basic Colors &gt; Background</code> 颜色和 <code>ANSI Colors &gt; Black &gt; Bright</code> 设置成不一样的颜色即可。</p>
-<p><img src="/images/auto-suggestion-issue.png"></p>
+<p><img src="/images/auto-suggestion-issue.png" alt></p>
 <h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>写这篇文章的初衷，仅仅是因为我刚刚对我的 Terminal 进行了配置，害怕忘记。以为很快就可以的文章，也写了 4，5 个小时。在这个过程中会去找各种参考，会去配上各类官方链接，慢慢地它就变成了一篇给大家看的文章。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://github.com/macdao/ocds-guide-to-setting-up-mac">Guide to setup Mac</a></li>
-<li><a href="https://segmentfault.com/a/1190000013612471">zsh+on-my-zsh配置教程指南(程序员必备)</a></li>
+<li><a href="https://github.com/macdao/ocds-guide-to-setting-up-mac" target="_blank" rel="noopener">Guide to setup Mac</a></li>
+<li><a href="https://segmentfault.com/a/1190000013612471" target="_blank" rel="noopener">zsh+on-my-zsh配置教程指南(程序员必备)</a></li>
 </ul>
 
     </div>
@@ -424,7 +421,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">33k</span>
+    <span title="Word count total">NaNm</span>
   </span>
 </div>
 <div class="busuanzi-count">

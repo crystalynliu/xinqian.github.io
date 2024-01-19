@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
@@ -19,7 +20,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="说起来当代社会有一个流行词语叫做可视化，以前我们是用纸笔，印刷技术来完成文字，数据的可视化。到了大数据井喷，人人都开始使用电子设备获取信息的时代，就需要使用技术来实现文字，数据的可视化。而在数据可视化中，最直观最有效的信息传递方式就是使用图表的方式来展现。 这里记录下来的是作为一个前端 developer, 在需要使用D3.js的去开发一个数据可视化界面设计时，所了解到的 D3.js。 这将成为一">
 <meta property="og:type" content="article">
@@ -142,12 +143,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -257,7 +258,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>3.9k</span>
+      <span></span>
     </span>
 </div>
 
@@ -270,8 +271,7 @@
     <div class="post-body" itemprop="articleBody"><p>说起来当代社会有一个流行词语叫做<strong>可视化</strong>，以前我们是用纸笔，印刷技术来完成文字，数据的可视化。到了大数据井喷，人人都开始使用电子设备获取信息的时代，就需要使用技术来实现文字，数据的可视化。而在数据可视化中，最直观最有效的信息传递方式就是<strong>使用图表的方式来展现</strong>。</p>
 <p>这里记录下来的是作为一个前端 developer, 在需要使用<code>D3.js</code>的去开发一个数据可视化界面设计时，所了解到的 <code>D3.js</code>。</p>
 <p>这将成为一系列的文章，这是第一篇。</p>
-<span id="more"></span>
-
+<a id="more"></a>
 <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h2 id="What’s-D3"><a href="#What’s-D3" class="headerlink" title="What’s D3?"></a>What’s D3?</h2><p>先来看看官方解释：</p>
 <blockquote>
 <p>D3 (or D3.js) is a JavaScript library for visualizing data using web standards. D3 helps you bring data to life using SVG, Canvas and HTML. D3 combines powerful visualization and interaction techniques with a data-driven approach to DOM manipulation, giving you the full capabilities of modern browsers and the freedom to design the right visual interface for your data.</p>
@@ -286,17 +286,17 @@
 <li>它跟目前存在的图形库（<code>Echarts</code>之类）相比，<strong>更底层</strong>，那它就有<strong>更大的灵活性</strong>，可以给 UX 以及 developer 更大的发挥空间。</li>
 </ul>
 <h1 id="How-to-use-and-learn-it"><a href="#How-to-use-and-learn-it" class="headerlink" title="How to use and learn it"></a>How to use and learn it</h1><h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><ul>
-<li><p>下载最新版本<code>.zip</code>(目前的版本已经更新到 V5)： <a href="https://github.com/d3/d3/releases/download/v5.5.0/d3.zip">d3.zip</a></p>
-</li>
+<li>下载最新版本<code>.zip</code>(目前的版本已经更新到 V5)： <a href="https://github.com/d3/d3/releases/download/v5.5.0/d3.zip" target="_blank" rel="noopener">d3.zip</a></li>
 <li><p>页面插入如下代码，在线使用</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://d3js.org/d3.v5.min.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://d3js.org/d3.v5.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>如果在框架中使用（React, Vue, Angular等），使用 npm 安装</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install d3 --save</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install d3 --save</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h2 id="Learning"><a href="#Learning" class="headerlink" title="Learning"></a>Learning</h2><ul>
-<li>非常长的 <a href="https://github.com/d3/d3/blob/master/API.md">API document</a></li>
-<li>成堆的 <a href="https://github.com/d3/d3/wiki">tutorials</a></li>
+<li>非常长的 <a href="https://github.com/d3/d3/blob/master/API.md" target="_blank" rel="noopener">API document</a></li>
+<li>成堆的 <a href="https://github.com/d3/d3/wiki" target="_blank" rel="noopener">tutorials</a></li>
 </ul>
 <h1 id="D3-with-DOM"><a href="#D3-with-DOM" class="headerlink" title="D3 with DOM"></a>D3 with DOM</h1><p><code>Data Divern Documents</code> 的体现，在于 D3.js 这个函数库，可以针对输入的数据通过它的 API 方法去操作 DOM 元素（也就是 Documents, 来自于 HTML 概念）</p>
 <h2 id="Selection"><a href="#Selection" class="headerlink" title="Selection"></a>Selection</h2><p>D3 提供了一种 API，被成为 <code>selections</code>，可以对 DOM 中的任意节点进行操作。D3 的 选择器是定义于 W3C 标准,可以使用的选择器包括：</p>
@@ -320,15 +320,12 @@
 <li>更改 HTML 或文本内容</li>
 </ul>
 <p>例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">select</span>(<span class="string">&quot;p&quot;</span>).<span class="title function_">style</span>(<span class="string">&quot;color&quot;</span>, <span class="string">&quot;white&quot;</span>);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="string">"white"</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="Dynamic-Properies"><a href="#Dynamic-Properies" class="headerlink" title="Dynamic Properies"></a>Dynamic Properies</h2><p>如果对其他 DOM 函数库（类似于 jQuery）比较熟悉的同学可以发现这样的操作和 D3是非常的相似。然而，在 D3 中，属性以及样式也可以<strong>被指定为数据中的函数，并不仅仅只是简单的常量</strong>。</p>
 <p>例如，给每个段落随机的颜色：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">selectAll</span>(<span class="string">&quot;p&quot;</span>).<span class="title function_">style</span>(<span class="string">&quot;color&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;hsl(&quot;</span> + <span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">360</span> + <span class="string">&quot;,100%,50%)&quot;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"hsl("</span> + <span class="built_in">Math</span>.random() * <span class="number">360</span> + <span class="string">",100%,50%)"</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>在 D3 中，绑定是一种比较独特的职责。<strong>当数据被指定为一个数组，其中每个值都会被作为参数（d）传递到 selection 的函数中</strong>。根据默认的索引排序，数据中的第一个值会传递给匹配到的第一个node, 第二个值会传递给匹配到的第二个 node, 以此类推。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d3.<span class="title function_">selectAll</span>(<span class="string">&quot;p&quot;</span>)</span><br><span class="line">	.<span class="title function_">data</span>([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">	.<span class="title function_">style</span>(<span class="string">&quot;font-size&quot;</span>, <span class="keyword">function</span>(<span class="params">d</span>) &#123;<span class="keyword">return</span> d + <span class="string">&quot;px&quot;</span>&#125;);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">"p"</span>)</span><br><span class="line">	.data([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">	.style(<span class="string">"font-size"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;<span class="keyword">return</span> d + <span class="string">"px"</span>&#125;);</span><br></pre></td></tr></table></figure>
 <p>以上的代码说明，当一组数据绑定到 <code>p</code> 元素上，结果就是使用这些数据动态的设置每个 <code>p</code> 的字体大小。</p>
 <p>D3 中提供了以下两个方法来绑定数据：</p>
 <ul>
@@ -347,18 +344,18 @@
 <li><code>.exit()</code> 返回<strong>未能绑定到数据的 DOM 元素集合</strong>，结合<code>.remove()</code>操作，来删除那些没有绑定上数据的 DOM 元素。</li>
 </ul>
 <p>与以上两种操作相对应的是，<code>.data()</code>操作默认会<strong>返回可更新的 DOM 元素集合</strong>，所以说，如果你忘记了<code>.enter()</code> 以及 <code>.exit()</code> 操作，那么我们将自动获得已经与存在数据绑定上的元素。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Update...</span></span><br><span class="line"><span class="keyword">const</span> p = d3.<span class="title function_">select</span>(<span class="string">&quot;body&quot;</span>)</span><br><span class="line">  .<span class="title function_">selectAll</span>(<span class="string">&quot;p&quot;</span>)</span><br><span class="line">  .<span class="title function_">data</span>([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">  .<span class="title function_">text</span>(<span class="keyword">function</span>(<span class="params">d</span>) &#123; <span class="keyword">return</span> d; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Enter...</span></span><br><span class="line">p.<span class="title function_">enter</span>().<span class="title function_">append</span>(<span class="string">&quot;p&quot;</span>)</span><br><span class="line"> .<span class="title function_">text</span>(<span class="keyword">function</span>(<span class="params">d</span>) &#123; <span class="keyword">return</span> d; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Exit...</span></span><br><span class="line">p.<span class="title function_">exit</span>().<span class="title function_">remove</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Update...</span></span><br><span class="line"><span class="keyword">const</span> p = d3.select(<span class="string">"body"</span>)</span><br><span class="line">  .selectAll(<span class="string">"p"</span>)</span><br><span class="line">  .data([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">  .text(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Enter...</span></span><br><span class="line">p.enter().append(<span class="string">"p"</span>)</span><br><span class="line"> .text(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Exit...</span></span><br><span class="line">p.exit().remove()</span><br></pre></td></tr></table></figure>
 <p>通过对 selection 的一些操作描述，会发现这些操作，将选择的 DOM 元素分为了3组：</p>
 <ul>
 <li>需要创建的元素（加入组）</li>
 <li>需要更新的元素（更新组）</li>
-<li>需要删除的元素（退出组）</li>
+<li><p>需要删除的元素（退出组）</p>
+<p><img src="/images/bindingData.jpg" alt></p>
+</li>
 </ul>
-<p> <img src="/images/bindingData.jpg"></p>
 <p>总结得出，D3 使用这些操作，<strong>实现了数据集到 DOM 元素实例化之间的平滑转换</strong>。这发挥了提升性能最大化，并对转换有了更大的控制。实际上这种渲染方式与 React 管理子元素渲染的方式相似。</p>
 <h2 id="Handling-events"><a href="#Handling-events" class="headerlink" title="Handling events"></a>Handling events</h2><p>类似于 jQuery 这类的函数库，<strong>D3使用 <code>selection.on()</code> 对 elements 添加事件处理函数，相应的数据（d）和索引（i）也将会当做参数传入到事件处理函数中进行处理</strong>。事件有以下几种：<code>click</code>, <code>mouseenter</code>, <code>mouseover</code>, <code>mouseleave</code>, <code>mouseout</code> 以及 <code>mousemove</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d3.<span class="title function_">selectAll</span>(<span class="string">&#x27;rect&#x27;</span>)</span><br><span class="line">  .<span class="title function_">on</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params">d, i</span>) &#123;</span><br><span class="line">    d3.<span class="title function_">select</span>(<span class="variable language_">this</span>)</span><br><span class="line">      .<span class="title function_">text</span>(<span class="string">&#x27;You clicked on rect&#x27;</span> + i);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">'rect'</span>)</span><br><span class="line">  .on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d, i</span>) </span>&#123;</span><br><span class="line">    d3.select(<span class="keyword">this</span>)</span><br><span class="line">      .text(<span class="string">'You clicked on rect'</span> + i);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 <p>这段代码实现当点击后就修改其 text 指明第几个元素被点击。</p>
 <h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>当你看完了这篇文章，似乎觉得这些都是纸上谈兵。没错，这一篇 D3 的文章更偏于理论介绍, 是期望大家在看接下来的文章时，对 D3 已经有了大概的认知，那我们就更容易理解一些 Demo 以及其他的 API 概念。如果大家还对 D3 有兴趣，那么可以持续关注这一系列。</p>
 
@@ -421,7 +418,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">33k</span>
+    <span title="Word count total">NaNm</span>
   </span>
 </div>
 <div class="busuanzi-count">

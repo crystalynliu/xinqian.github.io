@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
@@ -19,7 +20,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="TDD 作为敏捷开发中的重要环节，总是讨论的焦点，总是在说 TDD 这样那样。其实，我觉得大多数人对 TDD 的理解是模糊的，不明确的。从而导致没有人愿意有意识的去尝试使用 TDD, 去验证一下 TDD 到底会给我们带来什么？ 我也是一枚初识 TDD 的菜鸟，所以想用自己的理解以及经历来解答上面的问题。">
 <meta property="og:type" content="article">
@@ -142,12 +143,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -257,7 +258,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>3.9k</span>
+      <span></span>
     </span>
 </div>
 
@@ -269,9 +270,8 @@
     
     <div class="post-body" itemprop="articleBody"><p>TDD 作为敏捷开发中的重要环节，总是讨论的焦点，总是在说 TDD 这样那样。其实，我觉得大多数人对 TDD 的理解是模糊的，不明确的。从而导致没有人愿意有意识的去尝试使用 TDD, 去验证一下 TDD 到底会给我们带来什么？</p>
 <p>我也是一枚初识 TDD 的菜鸟，所以想用自己的理解以及经历来解答上面的问题。</p>
-<span id="more"></span>
-
-<h1 id="What’s-TDD"><a href="#What’s-TDD" class="headerlink" title="What’s TDD?"></a>What’s TDD?</h1><p>先来看看 <a href="https://en.wikipedia.org/wiki/Test-driven_development">Wiki</a> 的定义</p>
+<a id="more"></a>
+<h1 id="What’s-TDD"><a href="#What’s-TDD" class="headerlink" title="What’s TDD?"></a>What’s TDD?</h1><p>先来看看 <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="noopener">Wiki</a> 的定义</p>
 <blockquote>
 <p>Test-driven development (TDD) is a <strong>software development process</strong> that relies on the repetition of a very short development cycle: requirements are turned into very specific test cases, then the software is improved to pass the new tests, only.</p>
 <p>Test-driven development is related to the test-first programming concepts of extreme programming, begun in 1999, but more recently has created more general interest in its own right.</p>
@@ -291,7 +291,7 @@
 <p>给了定义，再来看看区别，ATDD 本身更关注于能让 BA，QA 以及 DEV 在产品需求方面快速有一个统一的理解，而 UTDD 更关注于能快速的让 DEV 得到在程序设计方面的反馈。</p>
 <p>而现在大多数人所认为的 TDD 只是单方面的理解为 UTDD。那接下来主要的关注点也就是备受争论的 UTDD。</p>
 <h1 id="How-to-use-UTDD"><a href="#How-to-use-UTDD" class="headerlink" title="How to use UTDD?"></a>How to use UTDD?</h1><p>UTDD 是一种依赖重复<strong>特定开发流程</strong>的方法论，学习怎么用 UTDD, 先要了解这种开发流程是什么样的。</p>
-<h2 id="Test-driven-development-cycle"><a href="#Test-driven-development-cycle" class="headerlink" title="Test driven development cycle"></a>Test driven development cycle</h2><p><img src="/images/cycle.jpeg"></p>
+<h2 id="Test-driven-development-cycle"><a href="#Test-driven-development-cycle" class="headerlink" title="Test driven development cycle"></a>Test driven development cycle</h2><p><img src="/images/cycle.jpeg" alt></p>
 <ol>
 <li>Add a test</li>
 <li>Run all tests and see if the new test fails</li>
@@ -322,7 +322,7 @@
 <ul>
 <li>写一个失败的测试。是对需求的描述，是为了确认需求是什么，而不用关心怎么实现。</li>
 <li>实现代码让测试通过。不用考虑需求是否符合预期，不用 care 代码写的多烂，只要写出让输入变成输出的逻辑就可以了。</li>
-<li>重构代码。既不用考虑需求，也没有实现压力，更不用害怕重构会破坏原有的功能。找出代码的 bad smell，提高代码质量。</li>
+<li>重构代码。既不用考虑需求，也没有实现压力，更不用害怕重构会破坏原有的功能。找出代码的 bad smell，提高代码质量。 </li>
 </ul>
 <h1 id="Why-we-need-to-use-UTDD"><a href="#Why-we-need-to-use-UTDD" class="headerlink" title="Why we need to use UTDD?"></a>Why we need to use UTDD?</h1><p><strong>Why</strong> 翻译成中文是”为什么“，而我们再用这个词的时候，真正想知道应该是”什么“。”Why we need to use UTDD?“ 这句话在我看来实际就是一种<strong>趋利</strong>的表现，实际上真正表达的是”UTDD 能给我们带来什么好处“。</p>
 <ul>
@@ -362,11 +362,11 @@
 </li>
 </ul>
 <h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>看完上面👆这么多好与不好，总看起来像是纸上谈兵，不落地。也有人觉得 TDD 就是一种伪理论伪方法，并不会带来实质性的好处。我不推崇 TDD, 我也并不否定它，我觉得只有认真学习及实践过才有资格谈论好坏。</p>
-<p>日本有一种剑道学习方法名为 <a href="https://baike.baidu.com/item/%E5%AE%88%E7%A0%B4%E7%A6%BB?fr=aladdin">“守，破，离”</a>。<strong>守</strong> 即是先要虚心学习， <strong>破</strong> 即是当你学习熟练之后就可以挑战它摒弃糟粕，<strong>离</strong> 即是重新定义你学习的东西。</p>
+<p>日本有一种剑道学习方法名为 <a href="https://baike.baidu.com/item/%E5%AE%88%E7%A0%B4%E7%A6%BB?fr=aladdin" target="_blank" rel="noopener">“守，破，离”</a>。<strong>守</strong> 即是先要虚心学习， <strong>破</strong> 即是当你学习熟练之后就可以挑战它摒弃糟粕，<strong>离</strong> 即是重新定义你学习的东西。</p>
 <p>当我们大谈阔论 TDD 的时候，又有几个人真正地虚心学习过？</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://www.jianshu.com/p/62f16cd4fef3">《深度解读-TDD》</a></li>
-<li><a href="http://insights.thoughtworkers.org/talk-about-tdd-again/">让我们再聊聊 TDD</a></li>
+<li><a href="https://www.jianshu.com/p/62f16cd4fef3" target="_blank" rel="noopener">《深度解读-TDD》</a></li>
+<li><a href="http://insights.thoughtworkers.org/talk-about-tdd-again/" target="_blank" rel="noopener">让我们再聊聊 TDD</a></li>
 </ul>
 
     </div>
@@ -428,7 +428,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">33k</span>
+    <span title="Word count total">NaNm</span>
   </span>
 </div>
 <div class="busuanzi-count">
