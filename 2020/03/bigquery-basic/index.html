@@ -139,12 +139,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -254,7 +254,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span></span>
+      <span>4.3k</span>
     </span>
 </div>
 
@@ -265,8 +265,9 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>在 2020 年的今天，如果没有大量的数据存储，机器学习就是一场空谈。当我们谈论大数据量存储的时候，我们就会考虑选择怎么样的基础架构才能降低大量数据存储所带来的耗时以及费用昂贵的问题。Google 推出了一种全托管式云数据仓库 – BigQuery</p>
-<a id="more"></a>
-<h1 id="What’s-BigQuery"><a href="#What’s-BigQuery" class="headerlink" title="What’s BigQuery?"></a>What’s BigQuery?</h1><p>先来看看<a href="https://cloud.google.com/bigquery/docs" target="_blank" rel="noopener">官方文档</a>的中英文简介：</p>
+<span id="more"></span>
+
+<h1 id="What’s-BigQuery"><a href="#What’s-BigQuery" class="headerlink" title="What’s BigQuery?"></a>What’s BigQuery?</h1><p>先来看看<a href="https://cloud.google.com/bigquery/docs">官方文档</a>的中英文简介：</p>
 <blockquote>
 <p>BigQuery is Google’s fully managed, petabyte scale, low cost analytics data warehouse. BigQuery is NoOps—there is no infrastructure to manage and you don’t need a database administrator—so you can focus on analyzing data to find meaningful insights, use familiar SQL, and take advantage of our pay-as-you-go model.</p>
 <p>BigQuery 是 Google 推出的全托管式低成本分析数据仓库，可支持 PB 级数据规模。BigQuery 无需运维：没有需要管理的基础架构，也无需指派数据库管理员。因此，您可以专注于分析数据，使用熟悉的 SQL 发掘有意义的数据洞见，并利用我们的即用即付模式。</p>
@@ -279,21 +280,21 @@
 </ul>
 <p>而对于如何进行上述的数据交互，Google 提供了 4 种方式：</p>
 <ul>
-<li>Google Cloud Console 中的 <a href="https://cloud.google.com/bigquery/docs/bigquery-web-ui" target="_blank" rel="noopener">BigQuery 网页界面</a></li>
-<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/quickstarts/quickstart-web-ui-classic" target="_blank" rel="noopener">经典版网页界面</a></li>
-<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/quickstarts/quickstart-command-line" target="_blank" rel="noopener">命令行工具</a></li>
-<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/reference/rest" target="_blank" rel="noopener">REST API</a></li>
+<li>Google Cloud Console 中的 <a href="https://cloud.google.com/bigquery/docs/bigquery-web-ui">BigQuery 网页界面</a></li>
+<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/quickstarts/quickstart-web-ui-classic">经典版网页界面</a></li>
+<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/quickstarts/quickstart-command-line">命令行工具</a></li>
+<li>BigQuery <a href="https://cloud.google.com/bigquery/docs/reference/rest">REST API</a></li>
 </ul>
 <h1 id="The-structure-of-BigQuery"><a href="#The-structure-of-BigQuery" class="headerlink" title="The structure of BigQuery"></a>The structure of BigQuery</h1><p>在学习与 BigQuery 的数据交互方式之前，先来了解一下 BigQuery 内部的基础架构。</p>
 <h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2><p>Datasets 是管理和控制 tables 和 views 的顶级容器, 包含在特定的项目中。tables 或者 views 必须属于 Datasets, 因此在加载数据到 BigQuery 中，至少需要创建一个数据集。而创建数据集时需要注意以下几点：</p>
 <ul>
-<li>创建数据集时必须指定一个位置(参考 <a href="https://cloud.google.com/bigquery/docs/locations" target="_blank" rel="noopener">Datasets Loction</a>)，而位置一但确定之后，没有办法更改，但是可以<a href="https://cloud.google.com/bigquery/docs/copying-datasets" target="_blank" rel="noopener">复制 Dataset 到其他区域</a>。</li>
+<li>创建数据集时必须指定一个位置(参考 <a href="https://cloud.google.com/bigquery/docs/locations">Datasets Loction</a>)，而位置一但确定之后，没有办法更改，但是可以<a href="https://cloud.google.com/bigquery/docs/copying-datasets">复制 Dataset 到其他区域</a>。</li>
 <li>每个项目中的 Datasets 名字必须是唯一的。</li>
 <li>Query 中引用的 tables 必须是同一位置数据集中的表</li>
 <li>复制 table 时，源表和目标表的数据集必须在同一个位置。</li>
 </ul>
 <p>最重要的是，<strong>创建、更新或者删除数据集是不需要付费的</strong> :p。</p>
-<p>关于如何创建数据集，控制数据集的访问，Google 提供了详细的<a href="https://cloud.google.com/bigquery/docs/datasets" target="_blank" rel="noopener">文档</a></p>
+<p>关于如何创建数据集，控制数据集的访问，Google 提供了详细的<a href="https://cloud.google.com/bigquery/docs/datasets">文档</a></p>
 <h2 id="Tables"><a href="#Tables" class="headerlink" title="Tables"></a>Tables</h2><p>BigQuery 允许在创建 table 时指定 table schema, 或者先创建表，之后在首次加载数据时使用 RESI API 指定 schema。</p>
 <p>BigQuery 还对支持的数据格式提供自动检测的功能为 table 创建 schema加载 Avro、Parquet、ORC、Firestore 导出数据或 Datastore 导出数据时，BigQuery 会自动从数据文件中检索架构。</p>
 <p>对于 BigQuery 表的操作，有几点限制：</p>
@@ -309,26 +310,26 @@
 <ul>
 <li>手动使用 UI 界面 (Google Cloud Console）</li>
 <li>创建 JSON 格式的 schema 文件, 之后将 JSON 文件做为 CLI 创建 table 命令时的配置参数</li>
-<li>调用 REST API     <code>jobs.insert</code> 或者 <code>tables.insert</code> 中使用 <code>schema</code> 属性进行配置</li>
+<li>调用 REST API 	<code>jobs.insert</code> 或者 <code>tables.insert</code> 中使用 <code>schema</code> 属性进行配置</li>
 </ul>
 <p>在指定 table schema 的时候必须提供每个列的 <strong>name</strong> 和 <strong>data type</strong>, <strong>description</strong> 和 <strong>mode</strong> 是可选项</p>
 <ul>
 <li><strong>Names</strong>: 列名只能包含字母（a-z、A-Z）、数字 (0-9) 或下划线 (_)，并且必须以字母或下划线开头。列名长度不得超过 128 个字符。列名不能重复，并且大小写不敏感。</li>
-<li><strong>Data type</strong>: 支持标准 SQL 数据类型 – <a href="https://cloud.google.com/bigquery/docs/schemas#standard_sql_data_types" target="_blank" rel="noopener">参考文档</a></li>
+<li><strong>Data type</strong>: 支持标准 SQL 数据类型 – <a href="https://cloud.google.com/bigquery/docs/schemas#standard_sql_data_types">参考文档</a></li>
 <li>Description: 可选项，类型为字符串，长度最大为 1024 个字符</li>
-<li>Mode: 支持 Nullable, Required, Repeated（包含<a href="https://cloud.google.com/bigquery/docs/nested-repeated" target="_blank" rel="noopener">指定类型值的数组</a>）, 可选项，默认是Nullable</li>
+<li>Mode: 支持 Nullable, Required, Repeated（包含<a href="https://cloud.google.com/bigquery/docs/nested-repeated">指定类型值的数组</a>）, 可选项，默认是Nullable</li>
 </ul>
-<p>关于几种指定 shcema 方式的具体操作和修改表的 schma，参考 <a href="https://cloud.google.com/bigquery/docs/schemas" target="_blank" rel="noopener">BigQuery 文档</a></p>
+<p>关于几种指定 shcema 方式的具体操作和修改表的 schma，参考 <a href="https://cloud.google.com/bigquery/docs/schemas">BigQuery 文档</a></p>
 <h3 id="Partitioned-tables"><a href="#Partitioned-tables" class="headerlink" title="Partitioned tables"></a>Partitioned tables</h3><p>Partitioned tables (分区表) 是<strong>一种将表划分为多个区段的特殊表</strong>。 分区表与常规表相比有两点优势：</p>
 <ul>
 <li>可以通过将大型表划分为较小的分区来<strong>提高查询的性能</strong></li>
 <li>通过查询读取的字节数，来<strong>控制费用</strong></li>
 </ul>
 <p>BigQuery table 有三种分区方式。</p>
-<h4 id="Ingestion-time-partitioned-table"><a href="#Ingestion-time-partitioned-table" class="headerlink" title="Ingestion-time partitioned table"></a>Ingestion-time partitioned table</h4><p>当选择 <a href="https://cloud.google.com/bigquery/docs/creating-partitioned-tables" target="_blank" rel="noopener">Ingestion time 分区表</a>时， BigQuery 会<strong>自动按照数据提取或者到达的日期进行分区</strong>。Ingestion-time 分区表包含一个名为 <code>_PARTITIONTIME</code>, 这个伪列中存储着数据加载日期的时间戳，我们可以通过修改 <code>_PARTITIONTIME</code> 列的值来重定向数据到别的分区。</p>
+<h4 id="Ingestion-time-partitioned-table"><a href="#Ingestion-time-partitioned-table" class="headerlink" title="Ingestion-time partitioned table"></a>Ingestion-time partitioned table</h4><p>当选择 <a href="https://cloud.google.com/bigquery/docs/creating-partitioned-tables">Ingestion time 分区表</a>时， BigQuery 会<strong>自动按照数据提取或者到达的日期进行分区</strong>。Ingestion-time 分区表包含一个名为 <code>_PARTITIONTIME</code>, 这个伪列中存储着数据加载日期的时间戳，我们可以通过修改 <code>_PARTITIONTIME</code> 列的值来重定向数据到别的分区。</p>
 <p>对于这类分区表的查询可以使用 <code>_PARTITIONTIME</code> 列来指定过滤条件，以减少查询扫描的数据量。</p>
-<h4 id="Date-or-timestamp-partitioned-tables"><a href="#Date-or-timestamp-partitioned-tables" class="headerlink" title="Date or timestamp partitioned tables"></a>Date or timestamp partitioned tables</h4><p>BigQuery 允许使用<strong>特定的 Date 列或者 timestamp 列进行分区</strong>，写入 <a href="https://cloud.google.com/bigquery/docs/creating-column-partitions" target="_blank" rel="noopener">Date/timestamp 分区表</a> 的数据会根据相应列的日期分配到对应的分区。这种分区表可以不使用伪列，可以根据分区列指定过滤条件。</p>
-<h4 id="Integer-range-partitioned-tables-（beta）"><a href="#Integer-range-partitioned-tables-（beta）" class="headerlink" title="Integer range partitioned tables （beta）"></a>Integer range partitioned tables （beta）</h4><p>BigQuery 也允许使用<strong>特定的 Integer 列，根据提供的start，end以及 interval 来分区</strong>。如果需要创建 <a href="https://cloud.google.com/bigquery/docs/creating-integer-range-partitions" target="_blank" rel="noopener">Integer-range 分区表</a>，需要提供以下各项配置：</p>
+<h4 id="Date-or-timestamp-partitioned-tables"><a href="#Date-or-timestamp-partitioned-tables" class="headerlink" title="Date or timestamp partitioned tables"></a>Date or timestamp partitioned tables</h4><p>BigQuery 允许使用<strong>特定的 Date 列或者 timestamp 列进行分区</strong>，写入 <a href="https://cloud.google.com/bigquery/docs/creating-column-partitions">Date&#x2F;timestamp 分区表</a> 的数据会根据相应列的日期分配到对应的分区。这种分区表可以不使用伪列，可以根据分区列指定过滤条件。</p>
+<h4 id="Integer-range-partitioned-tables-（beta）"><a href="#Integer-range-partitioned-tables-（beta）" class="headerlink" title="Integer range partitioned tables （beta）"></a>Integer range partitioned tables （beta）</h4><p>BigQuery 也允许使用<strong>特定的 Integer 列，根据提供的start，end以及 interval 来分区</strong>。如果需要创建 <a href="https://cloud.google.com/bigquery/docs/creating-integer-range-partitions">Integer-range 分区表</a>，需要提供以下各项配置：</p>
 <ul>
 <li>用于创建 integer range 分区的列名</li>
 <li>分区范围的 start 值（含边界值）</li>
@@ -336,28 +337,28 @@
 <li>分区中每个范围的阈值 interval</li>
 </ul>
 <p><strong>PS</strong>: start 和 end 之间范围的数量上限可能为 10 万。但是，由于每个范围都是一个分区，因此每个表的数据范围数量上限为 4000 个分区。</p>
-<p>对于 Date/timestamp 分区表 和 Integer-range 分区表来说，会存在两个特殊的分区：</p>
+<p>对于 Date&#x2F;timestamp 分区表 和 Integer-range 分区表来说，会存在两个特殊的分区：</p>
 <ul>
 <li><code>__NULL__</code> 分区：表示分区列中具有 NULL 值的行</li>
 <li><code>__UNPARTITIONED__</code> 分区：表示在允许范围之外的数据</li>
 </ul>
-<p>关于如何创建，管理，查询  partition table, 参考 <a href="https://cloud.google.com/bigquery/docs/partitioned-tables" target="_blank" rel="noopener">BigQuery 文档</a></p>
+<p>关于如何创建，管理，查询  partition table, 参考 <a href="https://cloud.google.com/bigquery/docs/partitioned-tables">BigQuery 文档</a></p>
 <h2 id="Clustered-tables-WIP"><a href="#Clustered-tables-WIP" class="headerlink" title="Clustered tables - WIP"></a>Clustered tables - WIP</h2><h2 id="Views-WIP"><a href="#Views-WIP" class="headerlink" title="Views - WIP"></a>Views - WIP</h2><h1 id="Working-with-data-in-BigQuery"><a href="#Working-with-data-in-BigQuery" class="headerlink" title="Working with data in BigQuery"></a>Working with data in BigQuery</h1><h2 id="Loading-data-into-BigQuery"><a href="#Loading-data-into-BigQuery" class="headerlink" title="Loading data into BigQuery"></a>Loading data into BigQuery</h2><p>BigQuery 本身也支持不用加载就可以执行的查询，但是限制较多，很多情况下还是需要将数据加载到 BigQuery 中才能进行查询。加载数据的方式有很多种：</p>
 <ul>
 <li>从 Google Cloud Storage 加载</li>
 <li>从其他 Google 服务（例如 Google Ad Manager 和 Google Ads）加载</li>
 <li>从本地数据源加载</li>
-<li>使用<a href="https://cloud.google.com/bigquery/streaming-data-into-bigquery" target="_blank" rel="noopener">流式插入</a>功能插入各条记录</li>
-<li>使用 <a href>DML(Data Manipulation Language)</a> 语句执行批量插入</li>
-<li>在 Dataflow 流水线中使用 <a href="https://beam.apache.org/documentation/io/built-in/google-bigquery/" target="_blank" rel="noopener">BigQuery I/O</a> 转换将数据写入 BigQuery</li>
+<li>使用<a href="https://cloud.google.com/bigquery/streaming-data-into-bigquery">流式插入</a>功能插入各条记录</li>
+<li>使用 <a href="">DML(Data Manipulation Language)</a> 语句执行批量插入</li>
+<li>在 Dataflow 流水线中使用 <a href="https://beam.apache.org/documentation/io/built-in/google-bigquery/">BigQuery I&#x2F;O</a> 转换将数据写入 BigQuery</li>
 </ul>
-<p><strong>Notes</strong>: 加载数据时可以将数据加载到新的表或分区或者将数据附加到现有的表或分区，也可以覆盖某个表或分区。具体详见 <a href="https://cloud.google.com/bigquery/docs/managing-partitioned-tables" target="_blank" rel="noopener">Manage partitioned tables</a></p>
+<p><strong>Notes</strong>: 加载数据时可以将数据加载到新的表或分区或者将数据附加到现有的表或分区，也可以覆盖某个表或分区。具体详见 <a href="https://cloud.google.com/bigquery/docs/managing-partitioned-tables">Manage partitioned tables</a></p>
 <p>目前，对于从文件加载数据我们只支持 Google Cloud Storage 和 本地数据源，并且支持的数据格式只有以下几种：</p>
 <ul>
 <li>Cloud Storage: Avro，CSV， JSON (仅限换行符分隔格式)， ORC，Parquet，Datastore exports，Firestore exports</li>
 <li>本地数据源: Avro，CSV， JSON (仅限换行符分隔格式)，ORC，Parquet</li>
 </ul>
-<p>加载数据时的默认格式是 CSV，并且数据加载时也有相对应的限制，具体参考<a href="https://cloud.google.com/bigquery/docs/loading-data" target="_blank" rel="noopener">BigQuery 文档</a></p>
+<p>加载数据时的默认格式是 CSV，并且数据加载时也有相对应的限制，具体参考<a href="https://cloud.google.com/bigquery/docs/loading-data">BigQuery 文档</a></p>
 <h2 id="Query-data-from-BigQuery"><a href="#Query-data-from-BigQuery" class="headerlink" title="Query data from BigQuery"></a>Query data from BigQuery</h2><p>BigQuery 的查询方式主要有两种：</p>
 <ul>
 <li><strong>交互式查询</strong>：查询会尽快执行</li>
@@ -380,10 +381,10 @@
 <li>保存到 Google drive - beta</li>
 <li>保存到 Google sheets</li>
 </ul>
-<p><strong>Notes</strong>: 如果查询结果保存在临时表里，当执行重复查询的时候，BigQuery 会尝试使用缓存的结果。详细内容查询 <a href="https://cloud.google.com/bigquery/docs/cached-results" target="_blank" rel="noopener">BigQuery 官方文档</a></p>
+<p><strong>Notes</strong>: 如果查询结果保存在临时表里，当执行重复查询的时候，BigQuery 会尝试使用缓存的结果。详细内容查询 <a href="https://cloud.google.com/bigquery/docs/cached-results">BigQuery 官方文档</a></p>
 <h3 id="Parameterized-queries-–-WIP"><a href="#Parameterized-queries-–-WIP" class="headerlink" title="Parameterized queries – WIP"></a>Parameterized queries – WIP</h3><h3 id="Querying-multiple-tables-using-a-wildcard-–-WIP"><a href="#Querying-multiple-tables-using-a-wildcard-–-WIP" class="headerlink" title="Querying multiple tables using a wildcard – WIP"></a>Querying multiple tables using a wildcard – WIP</h3><h1 id="CLI-bq"><a href="#CLI-bq" class="headerlink" title="CLI - bq"></a>CLI - bq</h1><p>It will come soon.</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://cloud.google.com/bigquery/docs" target="_blank" rel="noopener">BigQuery documentation</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs">BigQuery documentation</a></li>
 </ul>
 
     </div>
@@ -444,7 +445,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">NaNm</span>
+    <span title="Word count total">33k</span>
   </span>
 </div>
 <div class="busuanzi-count">
