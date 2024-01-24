@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="zjFKVFpIAnzGA1H6oKGPqfBb0jl2W1OqXi3DBH1JB-k">
+  <meta name="msvalidate.01" content="CD3CED86A0AACB9918F2C1576AB1EC9F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="git 和 github 目前是我工作生涯中用的最多的工具。不管是我的编程学习亦或者是我的工作，都需要本地使用 git 来 commit 代码的修改，并把 github 作为 remote 仓库, 将代码的修存储下来。我将会记录下我在使用他们的过程中做过的配置帮我解决了哪些问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何配置多个 Github SSH Key">
+<meta property="og:url" content="http://blog.xqliu.vip/2024/01/multiple-ssh-config/index.html">
+<meta property="og:site_name" content="No End for Learning">
+<meta property="og:description" content="git 和 github 目前是我工作生涯中用的最多的工具。不管是我的编程学习亦或者是我的工作，都需要本地使用 git 来 commit 代码的修改，并把 github 作为 remote 仓库, 将代码的修存储下来。我将会记录下我在使用他们的过程中做过的配置帮我解决了哪些问题。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-24T03:29:11.000Z">
+<meta property="article:modified_time" content="2024-01-24T11:12:36.166Z">
+<meta property="article:author" content="Crystalyn">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="configuration">
+<meta property="article:tag" content="github">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.xqliu.vip/2024/01/multiple-ssh-config/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://blog.xqliu.vip/2024/01/multiple-ssh-config/","path":"2024/01/multiple-ssh-config/","title":"如何配置多个 Github SSH Key"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何配置多个 Github SSH Key | No End for Learning</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144478086-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-144478086-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">No End for Learning</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungry, Stay Foolish</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WHY"><span class="nav-number">1.</span> <span class="nav-text">WHY</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WHAT"><span class="nav-number">2.</span> <span class="nav-text">WHAT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HOW"><span class="nav-number">3.</span> <span class="nav-text">HOW</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-SSH-config"><span class="nav-number">3.1.</span> <span class="nav-text">配置 SSH config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-Config-%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">SSH Config 常用参数配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Host"><span class="nav-number">3.2.1.</span> <span class="nav-text">Host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HostName"><span class="nav-number">3.2.2.</span> <span class="nav-text">HostName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AddKeysToAgent"><span class="nav-number">3.2.3.</span> <span class="nav-text">AddKeysToAgent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IdentityFile"><span class="nav-number">3.2.4.</span> <span class="nav-text">IdentityFile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Port"><span class="nav-number">3.2.5.</span> <span class="nav-text">Port</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#USAGE"><span class="nav-number">4.</span> <span class="nav-text">USAGE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Crystalyn"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Crystalyn</p>
+  <div class="site-description" itemprop="description">Keep recording what I learned</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/crystalynliu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;crystalynliu" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:crystalynliu@163.com" title="E-Mail → mailto:crystalynliu@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://blog.xqliu.vip/2024/01/multiple-ssh-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Crystalyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="No End for Learning">
+      <meta itemprop="description" content="Keep recording what I learned">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何配置多个 Github SSH Key | No End for Learning">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何配置多个 Github SSH Key
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: Jan 24, 2024 11:29:11 / Modified: 19:12:36" itemprop="dateCreated datePublished" datetime="2024-01-24T11:29:11+08:00">Jan 24, 2024</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Setups/" itemprop="url" rel="index"><span itemprop="name">Setups</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/01/multiple-ssh-config/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/01/multiple-ssh-config/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>2.3k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>git 和 github 目前是我工作生涯中用的最多的工具。不管是我的编程学习亦或者是我的工作，都需要本地使用 git 来 commit 代码的修改，并把 github 作为 remote 仓库, 将代码的修存储下来。我将会记录下我在使用他们的过程中做过的配置帮我解决了哪些问题。</p>
+<span id="more"></span>
+
+<h1 id="WHY"><a href="#WHY" class="headerlink" title="WHY"></a>WHY</h1><p>我是一个喜欢公私分明的人，不喜欢使用我的私人账号提交代码到公司的 github, 包括不喜欢泄漏我的私人邮箱（关于如何针对不同的文件夹配置不同的 gitconfig, 可以自行查看<a href="./conditional-git-config.md">使用有条件的 .gitconfig</a>).</p>
+<p>对于这种情况，我希望有两个或者多个 github 账号，分别用来提交代码到不同的 github 仓库。那么问题来了，作为长期在 github 开发的重度患者， 为了使用方便快捷（不希望经常输入用户名密码），非常依赖 <strong>SSH（Secure Shell Protocol）key</strong> 作为提交代码到 github.com 的重要凭证。</p>
+<h1 id="WHAT"><a href="#WHAT" class="headerlink" title="WHAT"></a>WHAT</h1><p>到目前为止，对于 github 小白用户来说，对于 SSH 有很多问题，我将相关的文档列在这里，供大家参考。</p>
+<ul>
+<li><a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/about-ssh">什么是 SSH?</a></li>
+<li><a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys">如何查看已有的 SSH?</a></li>
+<li><a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">如何生成新的 SSH?</a></li>
+<li><a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">怎么将 SSH key 添加到 github 账户?</a></li>
+</ul>
+<h1 id="HOW"><a href="#HOW" class="headerlink" title="HOW"></a>HOW</h1><p>言归正传，假如我有两个 github 账户，并且我都想配置 SSH key 来推送代码，那这个时候就需要根据不同的 key, 推送本地仓库代码到不同的仓库甚至是不同的 organization.</p>
+<h2 id="配置-SSH-config"><a href="#配置-SSH-config" class="headerlink" title="配置 SSH config"></a>配置 SSH config</h2><ol>
+<li><p>在生成 SSH key 的时候，给一个特定的名字给保存 SSH 密钥的文件，例如：<code>id_xxxx_1</code>，一般这个文件会存储在 <code>/Users/&lt;YOU&gt;/.ssh</code> 文件夹。</p>
+</li>
+<li><p>经过第一步，如果你要针对两个 github 账户设置 SSH, 现在 <code>.ssh</code> 文件夹里应该会有<strong>两对</strong>密钥文件(分别是公钥和私钥)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id_xxxx_1.pub</span><br><span class="line">id_xxxx_1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id_xxxx_2.pub</span><br><span class="line">id_xxxx_2</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如何将对应的 ssh key 添加到对应的 github 账号，可以查看<a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">官方文档</a>, 这里就不再复述。</p>
+</blockquote>
+</li>
+<li><p>之后就需要在你的本地做 ssh config 配置，输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/config</span><br></pre></td></tr></table></figure>
+
+<p>找到<code>~/.ssh/config</code>文件，并查看内容。如果没有的话，创建一个新文件，放置在 user 目录下的 <code>.ssh</code> 文件夹下面，根据下面的例子进行配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Host github-1</span><br><span class="line">	HostName github.com</span><br><span class="line">	Port 22</span><br><span class="line">	AddKeysToAgent yes</span><br><span class="line">	IdentityFile ~/.ssh/id_xxxx_1</span><br><span class="line"></span><br><span class="line">Host github-2</span><br><span class="line">	HostName github.com</span><br><span class="line">	Port 22</span><br><span class="line">	AddKeysToAgent yes</span><br><span class="line">	IdentityFile ~/.ssh/id_xxxx_2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置完成之后，可以使用以下命令测试一下配置是否生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ssh -T github-1</span><br></pre></td></tr></table></figure>
+
+<p>如果测试链接通过，会收到下面这条消息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; Hi USERNAME! You&#x27;ve successfully authenticated, but GitHub does not</span><br><span class="line">&gt; provide shell access.</span><br></pre></td></tr></table></figure>
+
+<p>如果出现错误的情况，可以查阅 <a href="https://docs.github.com/zh/authentication/troubleshooting-ssh/error-permission-denied-publickey">SSH 故障排除文档</a>.</p>
+</li>
+</ol>
+<h2 id="SSH-Config-常用参数配置"><a href="#SSH-Config-常用参数配置" class="headerlink" title="SSH Config 常用参数配置"></a>SSH Config 常用参数配置</h2><h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><p>用于我们执行 SSH 命令的时候如何匹配到该配置。</p>
+<ul>
+<li>*，匹配所有主机名。</li>
+<li>*.example.com，匹配以 .example.com 结尾。</li>
+<li>!<em>.dialup.example.com,</em>.example.com，以 ! 开头是排除的意思。</li>
+<li>192.168.0.?，匹配 192.168.0.[0-9] 的 IP。</li>
+</ul>
+<h3 id="HostName"><a href="#HostName" class="headerlink" title="HostName"></a>HostName</h3><p>真实的主机名，默认值为命令行输入的值（允许 IP）。你也可以使用 %h，它将自动替换，只要替换后的地址是完整的就 ok。</p>
+<ul>
+<li>github 默认主机名是 <code>github.com</code>, 使用端口为 <code>22</code>。</li>
+<li>github ssh 主机名是 <code>ssh.github.com</code>, 使用端口为 <code>433</code>.</li>
+</ul>
+<h3 id="AddKeysToAgent"><a href="#AddKeysToAgent" class="headerlink" title="AddKeysToAgent"></a>AddKeysToAgent</h3><p>是否自动将 key 加入到 ssh-agent，值可以为 no(default)&#x2F;confirm&#x2F;ask&#x2F;yes。</p>
+<p>如果是 yes，key 和密码都将读取文件并以加入到 agent ，就像 ssh-add。其他分别是询问、确认、不加入的意思。添加到 ssh-agent 意味着将私钥和密码交给它管理，让它来进行身份认证。</p>
+<h3 id="IdentityFile"><a href="#IdentityFile" class="headerlink" title="IdentityFile"></a>IdentityFile</h3><p>指定读取的认证文件路径，允许 DSA，ECDSA，Ed25519 或 RSA。值可以直接指定也可以用一下参数代替：</p>
+<ul>
+<li>%d，本地用户目录 ~</li>
+<li>%u，本地用户</li>
+<li>%l，本地主机名</li>
+<li>%h，远程主机名</li>
+<li>%r，远程用户名</li>
+</ul>
+<h3 id="Port"><a href="#Port" class="headerlink" title="Port"></a>Port</h3><p>指定连接远程主机的哪个端口，22(default)</p>
+<p>其他参数，可以参考<a href="#reference">Reference</a>里的其他文档.</p>
+<h1 id="USAGE"><a href="#USAGE" class="headerlink" title="USAGE"></a>USAGE</h1><p>我们设置完成了。但是使用时会出现以下的<strong>问题</strong></p>
+<ul>
+<li>怎么改造让旧仓库使用新的 SSH key 推送代码？</li>
+<li>clone 仓库的时候发现，ssh 的 link 都是 <code>git@github.com</code> 开头, 那怎么应用到不同的 SSH Host 上呢？</li>
+</ul>
+<p>为了解决上面的问题，我们需要将仓库的 remote url 修改一下，例如从 github 复制的 url, 如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git@github.com:xxxx_1/repo.git</span><br></pre></td></tr></table></figure>
+
+<p>需要修改成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git@github-1:xxxx_1/repo.git</span><br></pre></td></tr></table></figure>
+
+<p><code>github-1</code> 是配置在 SSH config 里的 Host。如此这般，就不会出现 SSH key 推送混淆的问题了。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/about-ssh">github 官方文档</a></li>
+<li><a href="https://www.cnblogs.com/qingguo/p/5686247.html">一台电脑存放多个 git 账户的多个 rsa 秘钥</a></li>
+<li><a href="https://deepzz.com/post/how-to-setup-ssh-config.html">SSH Config 那些你所知道和不知道的事</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/configuration/" rel="tag"># configuration</a>
+              <a href="/tags/github/" rel="tag"># github</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/01/styled-components-basis/" rel="prev" title="样式包裹的 React 组件 - Styled Components">
+                  <i class="fa fa-angle-left"></i> 样式包裹的 React 组件 - Styled Components
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Crystalyn</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">35k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"crystalynliu","count":true,"lazyload":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
