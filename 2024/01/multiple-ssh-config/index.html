@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.xqliu.vip","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="git 和 github 目前是我工作生涯中用的最多的工具。不管是我的编程学习亦或者是我的工作，都需要本地使用 git 来 commit 代码的修改，并把 github 作为 remote 仓库, 将代码的修存储下来。我将会记录下我在使用他们的过程中做过的配置帮我解决了哪些问题。">
+    <meta name="description" content="我是一个喜欢公私分明的人，不喜欢使用我的私人账号提交代码到公司的 github, 包括不喜欢泄漏我的私人邮箱（关于如何针对不同的文件夹配置不同的 gitconfig, 可以自行查看使用有条件的 .gitconfig). 对于这种情况，我希望有两个或者多个 github 账号，分别用来提交代码到不同的 github 仓库。那么问题来了，作为长期在 github 开发的重度患者，怎么样才能轻松在不同的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何配置多个 Github SSH Key">
 <meta property="og:url" content="http://blog.xqliu.vip/2024/01/multiple-ssh-config/index.html">
 <meta property="og:site_name" content="No End for Learning">
-<meta property="og:description" content="git 和 github 目前是我工作生涯中用的最多的工具。不管是我的编程学习亦或者是我的工作，都需要本地使用 git 来 commit 代码的修改，并把 github 作为 remote 仓库, 将代码的修存储下来。我将会记录下我在使用他们的过程中做过的配置帮我解决了哪些问题。">
+<meta property="og:description" content="我是一个喜欢公私分明的人，不喜欢使用我的私人账号提交代码到公司的 github, 包括不喜欢泄漏我的私人邮箱（关于如何针对不同的文件夹配置不同的 gitconfig, 可以自行查看使用有条件的 .gitconfig). 对于这种情况，我希望有两个或者多个 github 账号，分别用来提交代码到不同的 github 仓库。那么问题来了，作为长期在 github 开发的重度患者，怎么样才能轻松在不同的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-24T03:29:11.000Z">
-<meta property="article:modified_time" content="2024-01-24T11:12:36.166Z">
+<meta property="article:modified_time" content="2024-01-25T01:20:26.010Z">
 <meta property="article:author" content="Crystalyn">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="configuration">
@@ -210,9 +210,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: Jan 24, 2024 11:29:11 / Modified: 19:12:36" itemprop="dateCreated datePublished" datetime="2024-01-24T11:29:11+08:00">Jan 24, 2024</time>
+      <time title="Created: Jan 24, 2024 11:29:11" itemprop="dateCreated datePublished" datetime="2024-01-24T11:29:11+08:00">Jan 24, 2024</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: Jan 25, 2024 09:20:26" itemprop="dateModified" datetime="2024-01-25T09:20:26+08:00">Jan 25, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -251,7 +257,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>2.3k</span>
+      <span>2.5k</span>
     </span>
 </div>
 
@@ -261,11 +267,18 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>git 和 github 目前是我工作生涯中用的最多的工具。不管是我的编程学习亦或者是我的工作，都需要本地使用 git 来 commit 代码的修改，并把 github 作为 remote 仓库, 将代码的修存储下来。我将会记录下我在使用他们的过程中做过的配置帮我解决了哪些问题。</p>
+    <div class="post-body" itemprop="articleBody"><p>我是一个喜欢公私分明的人，不喜欢使用我的私人账号提交代码到公司的 github, 包括不喜欢泄漏我的私人邮箱（关于如何针对不同的文件夹配置不同的 gitconfig, 可以自行查看<a href="./conditional-git-config.md">使用有条件的 .gitconfig</a>).</p>
+<p>对于这种情况，我希望有两个或者多个 github 账号，分别用来提交代码到不同的 github 仓库。那么问题来了，作为长期在 github 开发的重度患者，怎么样才能轻松在不同的项目之间无缝切换账户进行身份验证呢？</p>
 <span id="more"></span>
 
-<h1 id="WHY"><a href="#WHY" class="headerlink" title="WHY"></a>WHY</h1><p>我是一个喜欢公私分明的人，不喜欢使用我的私人账号提交代码到公司的 github, 包括不喜欢泄漏我的私人邮箱（关于如何针对不同的文件夹配置不同的 gitconfig, 可以自行查看<a href="./conditional-git-config.md">使用有条件的 .gitconfig</a>).</p>
-<p>对于这种情况，我希望有两个或者多个 github 账号，分别用来提交代码到不同的 github 仓库。那么问题来了，作为长期在 github 开发的重度患者， 为了使用方便快捷（不希望经常输入用户名密码），非常依赖 <strong>SSH（Secure Shell Protocol）key</strong> 作为提交代码到 github.com 的重要凭证。</p>
+<h1 id="WHY"><a href="#WHY" class="headerlink" title="WHY"></a>WHY</h1><p>先来了解一下，在什么情况下，我们需要配置多个 <strong>SSH（Secure Shell Protocol）key</strong>:</p>
+<ol>
+<li><p><strong>多个 GitHub 账户：</strong><br>如果你有多个 GitHub 账户，例如一个用于个人项目，另一个用于工作项目，那么每个账户可能需要不同的 SSH 密钥。</p>
+</li>
+<li><p><strong>访问多个 Git 仓库提供商：</strong><br>如果你同时使用 GitHub、GitLab 或 Bitbucket 等不同的 Git 仓库提供商，每个提供商可能需要使用不同的 SSH 密钥。</p>
+</li>
+</ol>
+<p>通过配置多个 SSH 密钥，你可以轻松地在不同的上下文中切换，确保每个项目或账户都能正确地进行身份验证，而不会产生冲突。</p>
 <h1 id="WHAT"><a href="#WHAT" class="headerlink" title="WHAT"></a>WHAT</h1><p>到目前为止，对于 github 小白用户来说，对于 SSH 有很多问题，我将相关的文档列在这里，供大家参考。</p>
 <ul>
 <li><a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/about-ssh">什么是 SSH?</a></li>
@@ -275,30 +288,37 @@
 </ul>
 <h1 id="HOW"><a href="#HOW" class="headerlink" title="HOW"></a>HOW</h1><p>言归正传，假如我有两个 github 账户，并且我都想配置 SSH key 来推送代码，那这个时候就需要根据不同的 key, 推送本地仓库代码到不同的仓库甚至是不同的 organization.</p>
 <h2 id="配置-SSH-config"><a href="#配置-SSH-config" class="headerlink" title="配置 SSH config"></a>配置 SSH config</h2><ol>
-<li><p>在生成 SSH key 的时候，给一个特定的名字给保存 SSH 密钥的文件，例如：<code>id_xxxx_1</code>，一般这个文件会存储在 <code>/Users/&lt;YOU&gt;/.ssh</code> 文件夹。</p>
+<li><p>在生成 SSH key 的时候，指定一个 SSH 密钥文件名，例如：<code>id_xxxx_1</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;your_email@example.com&quot;</span> -f ~/.ssh/id_xxxx_1</span><br></pre></td></tr></table></figure>
+
+<p>完成命令的 step 之后会生成两个文件：私钥 <code>id_xxxx_1</code> 和 公钥<code>id_xxxx_1.pub</code></p>
 </li>
-<li><p>经过第一步，如果你要针对两个 github 账户设置 SSH, 现在 <code>.ssh</code> 文件夹里应该会有<strong>两对</strong>密钥文件(分别是公钥和私钥)：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id_xxxx_1.pub</span><br><span class="line">id_xxxx_1</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id_xxxx_2.pub</span><br><span class="line">id_xxxx_2</span><br></pre></td></tr></table></figure>
-
+<li><p>将私钥添加到 SSH 代理:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/id_xxxx_1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将新生成的 SSH 密钥添加到 GitHub 账户：</p>
+<p>将公钥 <code>~/.ssh/id_xxxx_1.pub</code> 内容添加到 GitHub 账户的 SSH 密钥设置中。</p>
 <blockquote>
 <p>如何将对应的 ssh key 添加到对应的 github 账号，可以查看<a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">官方文档</a>, 这里就不再复述。</p>
 </blockquote>
 </li>
-<li><p>之后就需要在你的本地做 ssh config 配置，输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/config</span><br></pre></td></tr></table></figure>
+<li><p>创建或编辑 SSH 配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano ~/.ssh/config</span><br></pre></td></tr></table></figure>
 
-<p>找到<code>~/.ssh/config</code>文件，并查看内容。如果没有的话，创建一个新文件，放置在 user 目录下的 <code>.ssh</code> 文件夹下面，根据下面的例子进行配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Host github-1</span><br><span class="line">	HostName github.com</span><br><span class="line">	Port 22</span><br><span class="line">	AddKeysToAgent yes</span><br><span class="line">	IdentityFile ~/.ssh/id_xxxx_1</span><br><span class="line"></span><br><span class="line">Host github-2</span><br><span class="line">	HostName github.com</span><br><span class="line">	Port 22</span><br><span class="line">	AddKeysToAgent yes</span><br><span class="line">	IdentityFile ~/.ssh/id_xxxx_2</span><br></pre></td></tr></table></figure>
+<p>在配置文件中添加以下内容，为每个 GitHub 主机指定使用的密钥：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> # 默认密钥</span><br><span class="line"> Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">Port 22</span><br><span class="line">AddKeysToAgent yes</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"> # 新密钥</span><br><span class="line"> Host github-xxxx-1</span><br><span class="line">HostName github.com</span><br><span class="line">Port 22</span><br><span class="line">AddKeysToAgent yes</span><br><span class="line">IdentityFile ~/.ssh/id_xxxx1</span><br></pre></td></tr></table></figure>
+
+<p> 请确保 <code>Host</code> 后面的名称与 <code>git remote</code> 中的主机名相匹配。</p>
 </li>
-<li><p>设置完成之后，可以使用以下命令测试一下配置是否生效</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ssh -T github-1</span><br></pre></td></tr></table></figure>
+<li><p>测试 SSH 连接是否正常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ssh -T github-xxxx-1</span><br></pre></td></tr></table></figure>
 
 <p>如果测试链接通过，会收到下面这条消息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; Hi USERNAME! You&#x27;ve successfully authenticated, but GitHub does not</span><br><span class="line">&gt; provide shell access.</span><br></pre></td></tr></table></figure>
 
+<blockquote>
 <p>如果出现错误的情况，可以查阅 <a href="https://docs.github.com/zh/authentication/troubleshooting-ssh/error-permission-denied-publickey">SSH 故障排除文档</a>.</p>
+</blockquote>
 </li>
 </ol>
 <h2 id="SSH-Config-常用参数配置"><a href="#SSH-Config-常用参数配置" class="headerlink" title="SSH Config 常用参数配置"></a>SSH Config 常用参数配置</h2><h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><p>用于我们执行 SSH 命令的时候如何匹配到该配置。</p>
@@ -330,17 +350,15 @@
 <li>怎么改造让旧仓库使用新的 SSH key 推送代码？</li>
 <li>clone 仓库的时候发现，ssh 的 link 都是 <code>git@github.com</code> 开头, 那怎么应用到不同的 SSH Host 上呢？</li>
 </ul>
-<p>为了解决上面的问题，我们需要将仓库的 remote url 修改一下，例如从 github 复制的 url, 如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git@github.com:xxxx_1/repo.git</span><br></pre></td></tr></table></figure>
+<p>为了解决上面的问题，我们需要通过修改remote url指定不同的主机名来使用不同的密钥。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:yourusername/yourrepo.git   <span class="comment"># 使用默认密钥</span></span><br><span class="line">git <span class="built_in">clone</span> git@github-xxxx-1:yourusername/yourrepo.git  <span class="comment"># 使用新密钥</span></span><br></pre></td></tr></table></figure>
 
-<p>需要修改成：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git@github-1:xxxx_1/repo.git</span><br></pre></td></tr></table></figure>
-
-<p><code>github-1</code> 是配置在 SSH config 里的 Host。如此这般，就不会出现 SSH key 推送混淆的问题了。</p>
+<p><code>github-xxxx-1</code> 是配置在 SSH config 里的 Host。如此这般，就不会出现 SSH key 推送混淆的问题了。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/about-ssh">github 官方文档</a></li>
 <li><a href="https://www.cnblogs.com/qingguo/p/5686247.html">一台电脑存放多个 git 账户的多个 rsa 秘钥</a></li>
 <li><a href="https://deepzz.com/post/how-to-setup-ssh-config.html">SSH Config 那些你所知道和不知道的事</a></li>
+<li><a href="https://chat.openai.com/">ChatGPT</a></li>
 </ul>
 
     </div>
